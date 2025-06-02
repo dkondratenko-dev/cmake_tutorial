@@ -1,0 +1,37 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "C:/msys64/mingw64/include",
+                "C:/msys64/mingw64/include/c++/15.1.0",
+                "C:/msys64/mingw64/include/c++/15.1.0/x86_64-w64-mingw32",
+                "C:/msys64/mingw64/include/c++/15.1.0/backward",
+                "C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.1.0/include",
+                "C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.1.0/include-fixed",
+                "C:/msys64/mingw64/include"
+            ],
+            "defines": [
+                "_DEBUG",
+                "_REENTRANT",
+                "UNICODE",
+                "_UNICODE",
+                "__GNUC__",
+                "__MINGW32__",
+                "__MINGW64__"
+            ],
+            "compilerPath": "C:/msys64/mingw64/bin/g++.exe",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "windows-gcc-x64",
+            "compilerArgs": [
+                "-Wall",
+                "-Wextra",
+                "-Wpedantic"
+            ],
+            "configurationProvider": "ms-vscode.cmake-tools"
+        }
+    ],
+    "version": 4
+}

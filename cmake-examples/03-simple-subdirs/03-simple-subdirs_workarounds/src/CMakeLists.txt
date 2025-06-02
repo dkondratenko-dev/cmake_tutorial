@@ -8,7 +8,7 @@ set(SOURCES
 
 # Workaround 3
 # You can use CACHE variables to propagate data across CMake scopes, for example:
-# set(SOURCES src/hello.cpp CACHE INTERNAL "Source files for src")
+ set(SOURCES src/hello.cpp CACHE INTERNAL "Source files for src")
 
 # But this is generally discouraged because:
 # - It breaks the modular design of CMake targets.
