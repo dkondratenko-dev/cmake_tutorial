@@ -1,0 +1,8 @@
+03-simple-subdirs/
+├── CMakeLists.txt
+├── include/
+│   └── hello.h
+├── src/
+│   ├── CMakeLists.txt
+│   └── hello.cpp
+└── main.cpp

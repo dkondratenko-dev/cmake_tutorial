@@ -1,0 +1,7 @@
+02-basic-hello/
+├── CMakeLists.txt
+├── src/
+│   └── main.cpp
+├── README.md
+├── lesson.md
+└── trainer-notes.md
