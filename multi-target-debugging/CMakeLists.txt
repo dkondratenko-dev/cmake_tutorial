@@ -1,30 +1,16 @@
 cmake_minimum_required(VERSION 3.10)
-project(MultiTargetExample CXX) # Changed project name for clarity and specified CXX language
+project(MultiTargetExample)
 
-# Set build type to Debug. This automatically adds -g (debug info) and -O0 (no optimization) for GCC.
-set(CMAKE_BUILD_TYPE Debug)
-
-set(CMAKE_C_COMPILER "C:/msys64/mingw64/bin/gcc.exe")
-set(CMAKE_CXX_COMPILER "C:/msys64/mingw64/bin/g++.exe")
-
-
-# Define executables with their correct paths
 add_executable(server server/src/server.cpp)
 add_executable(client client/src/client.cpp)
 
-# Set C++ standard to C++17 for both targets
-target_compile_features(server PUBLIC cxx_std_17)
-target_compile_features(client PUBLIC cxx_std_17)
+# Set default build type to Debug if not specified
+if(NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE Debug CACHE STRING "Build type" FORCE)
+endif()
 
-# --- ВАЖЛИВО: Видаліть або закоментуйте цей блок ---
-# if(WIN32)
-#     set_target_properties(server PROPERTIES
-#         COMPILE_FLAGS "/Zi"  # ЦЕ ДЛЯ MSVC - ВИДАЛИТИ
-#         LINK_FLAGS "/DEBUG"  # ЦЕ ДЛЯ MSVC - ВИДАЛИТИ
-#     )
-#     set_target_properties(client PROPERTIES
-#         COMPILE_FLAGS "/Zi"  # ЦЕ ДЛЯ MSVC - ВИДАЛИТИ
-#         LINK_FLAGS "/DEBUG"  # ЦЕ ДЛЯ MSVC - ВИДАЛИТИ
-#     )
-# endif()
-# --- Кінець блоку для видалення ---
+# Ctrl+/ - comment\uncomment
+
+# Check if executable has debug symbol:
+# file client 
+# client: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=51bf1fb9bc4e09d8587338bf3195f06b50bd1799, for GNU/Linux 3.2.0, with debug_info, not stripped
