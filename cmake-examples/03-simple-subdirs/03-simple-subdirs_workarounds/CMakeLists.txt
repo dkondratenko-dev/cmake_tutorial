@@ -8,6 +8,8 @@ add_subdirectory(src)
 # Include headers globally
 include_directories(include)
 
+ file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS "src/*.cpp")
+
 # Create executable with main.cpp and all src files
 add_executable(main main.cpp ${SOURCES})
 
@@ -27,24 +29,24 @@ add_executable(main main.cpp ${SOURCES})
     # You lose granularity (e.g., per-library or per-module source grouping).
     # Less clear structure, harder to modularize.
 
-# file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS "src/*.cpp")
+
 
 # message("Simple: Sources: ${SOURCES}")
 
-# if(NOT SOURCES)
-#     # Diagnostic message (shown always)
-#     message(STATUS "Status: SOURCES variable is empty!")
+if(NOT SOURCES)
+    # Diagnostic message (shown always)
+    message(STATUS "Status: SOURCES variable is empty!")
 
-#     # Debug message (shown only if CMake is run with --log-level=DEBUG)
-#     message(DEBUG "Debug: SOURCES variable is empty — check your source file paths.")
+    # Debug message (shown only if CMake is run with --log-level=DEBUG)
+    message(DEBUG "Debug: SOURCES variable is empty — check your source file paths.")
 
-#     # Or you can use WARNING to show it more prominently without stopping
-#     message(WARNING "Warning: SOURCES variable is empty!")
+    # Or you can use WARNING to show it more prominently without stopping
+    message(WARNING "Warning: SOURCES variable is empty!")
 
-#     message(FATAL_ERROR "Error: SOURCES variable is empty! No source files found.")
-# else()
-#     message(STATUS "Status: Sources: ${SOURCES}")
-# endif()
+    # message(FATAL_ERROR "Error: SOURCES variable is empty! No source files found.")
+else()
+    message(STATUS "Status: Sources: ${SOURCES}")
+endif()
 
 
 
