@@ -1,0 +1,12 @@
+├── 06_project_structure.txt
+├── trainer-notes.md
+
+├── CMakeLists.txt
+├── src
+│   └── mylib
+│       ├── calculator.cpp
+│       ├── calculator.h
+│       └── CMakeLists.txt
+└── tests
+    ├── calculator_test.cpp
+    └── CMakeLists.txt

@@ -1,0 +1,15 @@
+GTestMockDIProject/
+├── src/
+│   ├── app/                    # Contains your main application logic
+│   │   ├── user_processor.h    # Class that processes users, depends on a logger
+│   │   └── user_processor.cpp
+│   ├── infra/                  # Contains infrastructure/utility components
+│   │   ├── ilogger.h           # Interface for logging (dependency)
+│   │   ├── real_logger.h       # Real implementation of the logger
+│   │   └── real_logger.cpp
+│   └── main.cpp                # Main application entry point
+├── tests/
+│   ├── user_processor_test.cpp # Google Test file for user_processor, using a mock logger
+│   └── real_logger_tests/      # NEW: Directory for RealLogger tests
+│       └── real_logger_test.cpp# NEW: Google Test file for RealLogger
+└── CMakeLists.txt              # Main CMake build script
