@@ -12,6 +12,7 @@ using ::testing::Eq;         // Checks for equality
 using ::testing::Return;     // Specifies a return value
 using ::testing::AtLeast;    // Expects a call at least N times
 using ::testing::StrictMock; // Optional: Makes mocks stricter about unexpected calls
+using ::testing::SaveArg;
 
 namespace test {
 
@@ -45,6 +46,28 @@ protected:
 TEST_F(UserProcessorTest, ProcessUserLogsInfo) {
     EXPECT_CALL(*mock_logger_ptr, log_info(_)).Times(1);
     processor->process_user("Alice");
+}
+
+TEST_F(UserProcessorTest, ProcessUserLogsInfoCorrectlyCapturesArgument) {
+    // 1. Declare a variable to store the captured argument.
+    //    It must be of the same type as the argument you want to capture (const std::string& message).
+    std::string captured_username_message;
+
+    // 2. Set up the expectation with the SaveArg action.
+    EXPECT_CALL(*mock_logger_ptr, log_info(::testing::_)) // Expect any string (_) to log_info
+        .Times(1) // Expect it to be called exactly once
+        .WillOnce(SaveArg<0>(&captured_username_message)); // Action: Save the 0-th arg into our variable
+
+    // 3. Call the method under test.
+    processor->process_user("Alice");
+
+    // 4. Assert on the captured argument after the call.
+    //    You can check for exact equality or if it contains a substring.
+    ASSERT_EQ(captured_username_message, "Processing user: Alice");
+
+    // Or, if you only care that 'Alice' is part of the message:
+    // ASSERT_NE(captured_username_message.find("Alice"), std::string::npos)
+    //    << "Expected log message to contain 'Alice', but got: " << captured_username_message;
 }
 
 // Test case 2: Verify log_error is called when deleting a protected user (no change)

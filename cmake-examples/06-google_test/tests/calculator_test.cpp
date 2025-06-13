@@ -8,15 +8,19 @@ protected:
     // You can set up shared resources here
     mylib::Calculator calc;
 
+
     // This method is called before each test in this fixture
     void SetUp() override {
         // Optional setup
+        
     }
 
     // This method is called after each test in this fixture
     void TearDown() override {
         // Optional teardown
     }
+
+    // SetUpTestSuite() / TearDownTestSuite()
 };
 
 // Test case for the 'add' method
@@ -29,6 +33,7 @@ TEST_F(CalculatorTest, AddsTwoNumbers) {
 
     // Assert (verify the result)
     ASSERT_EQ(8, result); // Checks if 8 is equal to result
+    
 }
 
 // Test case for the 'subtract' method

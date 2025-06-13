@@ -14,6 +14,7 @@ private:
     // Using a unique_ptr to manage the logger's lifetime.
     // This allows for flexible dependency injection (e.g., real or mock logger).
     std::unique_ptr<infra::ILogger> logger_;
+    // infra::ILogger*;
 
 public:
     // Constructor uses dependency injection: an ILogger instance is passed in.
