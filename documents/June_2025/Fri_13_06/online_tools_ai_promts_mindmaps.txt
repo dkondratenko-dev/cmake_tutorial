@@ -1,0 +1,50 @@
+Links:
+
+CPP -> ASM : https://godbolt.org/
+C++ online compiler: https://www.onlinegdb.com/online_c++_compiler
+Demangle online: https://demangler.com/
+Diagrams: https://app.diagrams.net/
+
+How to use AI:
+
+- context
+- promt:
+
+I want to learn how to work more effectively with various AI models.
+Could you explain the general principles of how AI works for better understanding? Specifically,
+ what is a 'context window' and how can I best utilize it? Also, please explain 'AI memory' and suggest
+ the best ways to refresh the context so the AI doesn't lose track of the main conversation over time.
+
+He will explain:
+	- About the context window, how it works.
+	- When AI starts to hallucinate and lose context. How to execute prompts effectively.
+
+Q: How can I use AI so that it doesn't forget context and doesn't hallucinate?
+Q: How can I learn to use AI more effectively? I want to become a professional in AI utilization.
+During some task for AI:
+Q: How can I best interact with you to accomplish this task?
+Promt:
+- You will be the lead developer or executor, and I will be your assistant.
+You will tell me what to do, and I will execute the commands and provide you with the results.
+- Please provide me with a plan or a list of steps to accomplish this task.
+
+C++ AI roadmap:
+
+I'm a C# developer aiming to transition to C++ for FinTech.
+Please provide a study roadmap for C++ that includes relevant AI learning tools and models, presented in a Markdown document.
+
+
+
+markdown
+
+
+
+Mindmaps + some kind of a roadmap:
+
+https://chatgpt.com/share/6846be37-ed38-800f-a295-c88715bc7c8b
+https://www.google.com/search?sca_esv=3865a5c24f38e491&rlz=1C1GCEA_enUA1164PL1165&sxsrf=AE3TifN71DRNJpg4CI9uCNI-e32ABeg1Sw:1749466776184&q=mindmap&udm=2&fbs=AIIjpHxU7SXXniUZfeShr2fp4giZ1Y6MJ25_tmWITc7uy4KIeioyp3OhN11EY0n5qfq-zEMZldv_eRjZ2XLYc5GnVnME7glWodDcaQwvGYJtospyF4GO5MC0p7Um53mJ2FnRmWzLfvs8MM15EI7IZ9K-WzjfyMSonUBkTYoaEYz_aoCWKu9TQ8dof5M0D_kBJ6KHVqAfl1pdvC4fEdvCuKBOfnDqAXG81w&sa=X&sqi=2&ved=2ahUKEwjkoPbNl-SNAxWQB9sEHbEuKI4QtKgLegQIGRAB&biw=1920&bih=911&dpr=1
+
+Linux commands mindmap:
+https://miro.medium.com/v2/resize:fit:1079/1*-NZwUIOL8Q6r4SXz5u2Bzg.jpeg
+https://www.google.com/search?q=linux+commands+mindmap&sca_esv=3865a5c24f38e491&rlz=1C1GCEA_enUA1164PL1165&udm=2&biw=1920&bih=911&sxsrf=AE3TifPurZPXum7rMboZ8c5lhnca_qSnIg%3A1749466780374&ei=nL5GaP7NFr6Kxc8Ps_yYmQc&oq=mindmap+linux+comm&gs_lp=EgNpbWciEm1pbmRtYXAgbGludXggY29tbSoCCAAyBhAAGAgYHkitJFD2B1iNGXABeACQAQCYAVqgAacHqgECMTG4AQPIAQD4AQGYAgugAvYGwgIKEAAYgAQYQxiKBcICCBAAGAcYChgewgIGEAAYBxgewgIFEAAYgATCAgcQABiABBgKwgIEEAAYHsICBhAAGAUYHsICBhAAGAoYHpgDAIgGAZIHAjExoAebKLIHAjEwuAfvBsIHBTEuOC4yyAca&sclient=img#vhid=8QwYSRd46HYXSM&vssid=mosaic
+
