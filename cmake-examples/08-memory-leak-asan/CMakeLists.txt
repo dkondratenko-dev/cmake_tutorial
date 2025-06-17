@@ -45,6 +45,8 @@ add_executable(memory-leak-asan
     src/main.cpp
     src/Trade.cpp
     src/TradeProcessor.cpp
+    src/TradingAccount.cpp
+    src/TradingStrategy.cpp
 )
 
 # Specify the include directories so the compiler can find your .hpp files
