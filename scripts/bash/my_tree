@@ -1,0 +1,7 @@
+#!/bin/bash
+# This script generates a directory tree, excluding the 'build' directory,
+# and saves the output to a file named 't.txt' in the current directory.
+
+echo "Directory tree (excluding 'build') saved to output.log"
+
+tree -I "build" > output.log
