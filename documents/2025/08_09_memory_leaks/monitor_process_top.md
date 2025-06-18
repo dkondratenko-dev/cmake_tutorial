@@ -1,3 +1,5 @@
+# Monitoring a single process
+
 Monitoring a single process is a common task for troubleshooting, resource management, or ensuring application uptime. The approach varies slightly depending on your operating system (Linux or Windows) and the level of detail you need.
 
 Here's a breakdown of how to monitor a single process, along with common tools and techniques:
@@ -11,20 +13,26 @@ Linux offers a variety of command-line tools for process monitoring, from quick 
 `top` is a real-time process viewer. To monitor a specific process, you'll need its Process ID (PID).
 
 * **Find the PID:**
+
     ```bash
     pgrep <process_name>
     ```
+
     (e.g., `pgrep firefox`)
     or
+
     ```bash
     ps aux | grep <process_name>
     ```
+
     (e.g., `ps aux | grep nginx`)
 
 * **Monitor with `top`:**
+
     ```bash
     top -p <PID>
     ```
+
     (e.g., `top -p 12345`)
 
     This will show only the details for the specified PID, refreshing periodically.
@@ -34,9 +42,11 @@ Linux offers a variety of command-line tools for process monitoring, from quick 
 `htop` is a more user-friendly and interactive version of `top`. If you don't have it, install it using your distribution's package manager (e.g., `sudo apt-get install htop` on Debian/Ubuntu, `sudo yum install htop` on CentOS/RHEL).
 
 * **Monitor with `htop`:**
+
     ```bash
     htop -p <PID>
     ```
+
     (e.g., `htop -p 12345`)
     You can also run `htop` and then press `F4` to filter by process name or `F3` to search.
 
@@ -45,15 +55,19 @@ Linux offers a variety of command-line tools for process monitoring, from quick 
 `ps` provides a snapshot of processes. It's not real-time, but it's excellent for getting specific information about a process.
 
 * **Get detailed info for a PID:**
+
     ```bash
     ps -p <PID> -o %cpu,%mem,vsz,rss,cmd
     ```
+
     (This example shows CPU usage, memory usage, virtual size, resident set size, and the command.)
 
 * **Get CPU usage by process name:**
+
     ```bash
     ps -C <process_name> -o %cpu
     ```
+
     (e.g., `ps -C rcu_sched -o %cpu`)
 
 ### 4. `pidstat` command (part of `sysstat` package)
@@ -61,15 +75,19 @@ Linux offers a variety of command-line tools for process monitoring, from quick 
 `pidstat` is designed for per-process monitoring and provides more granular statistics than `top` or `ps`. You might need to install the `sysstat` package.
 
 * **Monitor a specific PID continuously:**
+
     ```bash
     pidstat -p <PID> 1
     ```
+
     (This monitors PID every 1 second. Press Ctrl+C to stop.)
 
 * **Monitor with specific metrics (e.g., CPU, memory, I/O):**
+
     ```bash
     pidstat -u -r -d -p <PID> 1
     ```
+
     (`-u` for CPU, `-r` for memory, `-d` for I/O)
 
 ### 5. `lsof` (list open files)
@@ -77,6 +95,7 @@ Linux offers a variety of command-line tools for process monitoring, from quick 
 While not a direct performance monitor, `lsof` can show you all the files a specific process has open, including network connections. This is useful for debugging network issues or understanding what a process is interacting with.
 
 * **List open files for a PID:**
+
     ```bash
     lsof -p <PID>
     ```
@@ -139,10 +158,10 @@ Resource Monitor provides a more detailed, real-time view of system resources, i
 
 * **Open Resource Monitor:** Type `resmon` in the Start menu search bar and press Enter.
 * **Select the desired tab:**
-    * **CPU:** Shows CPU usage for individual processes. You can check the box next to a process to filter the graphs and modules below to only show data for that process.
-    * **Memory:** Shows memory usage.
-    * **Disk:** Shows disk activity.
-    * **Network:** Shows network activity.
+  * **CPU:** Shows CPU usage for individual processes. You can check the box next to a process to filter the graphs and modules below to only show data for that process.
+  * **Memory:** Shows memory usage.
+  * **Disk:** Shows disk activity.
+  * **Network:** Shows network activity.
 * **Filter by process:** In each tab, you can easily select a specific process to see its resource consumption in detail.
 
 ### 3. Performance Monitor (`perfmon.msc`)
@@ -165,8 +184,8 @@ Process Monitor is an advanced utility from Microsoft Sysinternals that shows re
 * **Download:** Get it from the official Microsoft Sysinternals website.
 * **Run `procmon.exe`:** It will immediately start capturing events.
 * **Set Filters:** This is crucial, as `procmon` generates a lot of data. Go to "Filter" -> "Filter..." (or `Ctrl+L`).
-    * Add a filter: `Process Name` `is` `<your_process_name.exe>` `Include`
-    * You can also filter by PID, Path, Operation, etc.
+  * Add a filter: `Process Name` `is` `<your_process_name.exe>` `Include`
+  * You can also filter by PID, Path, Operation, etc.
 * **Start/Stop Capture:** Use the magnifying glass icon or `Ctrl+E` to start/stop capturing events.
 * **Analyze events:** Observe the detailed activity (file access, registry changes, process/thread creation, network connections) of your chosen process.
 
@@ -178,3 +197,9 @@ Process Monitor is an advanced utility from Microsoft Sysinternals that shows re
 * **Alerting:** For critical processes, consider setting up alerts if certain thresholds are breached (e.g., high CPU for too long, excessive memory usage). Many enterprise monitoring solutions (like Nagios, Zabbix, Datadog) can do this, as can custom scripts.
 * **Logging:** If you need historical data, ensure your chosen method logs the information to a file.
 * **Overhead:** Be mindful of the monitoring tool's own resource consumption, especially for very fine-grained or continuous logging.
+
+# Additional resources
+
+## Monitoring tools
+
+<https://sematext.com/blog/ubuntu-monitoring-tools/>
