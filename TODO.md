@@ -1,1 +1,5 @@
-- Check the C++ roadmap
+- Virtual machine: Ubuntu
+- LOW: Windows build?
+  - .exe
+- ASAN
+- 08 <-> 09

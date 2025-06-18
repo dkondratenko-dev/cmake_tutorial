@@ -19,7 +19,7 @@ Interface Injection: The class implements an interface that defines the dependen
 - Link to design patterns : https://refactoring.guru/design-patterns
 
 - Show cmake examples from the real projects
-
+    -    -D UNIT_TESTS=ON \
 - Memory leaks analysis
     - Monitoring tools: https://sematext.com/blog/ubuntu-monitoring-tools/
 

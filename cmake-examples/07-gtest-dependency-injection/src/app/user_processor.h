@@ -18,7 +18,14 @@ private:
 
 public:
     // Constructor uses dependency injection: an ILogger instance is passed in.
+    // Constructor Injection
     explicit UserProcessor(std::unique_ptr<infra::ILogger> logger);
+
+    // DI - Setter Injection
+    void setLogger(std::unique_ptr<infra::ILogger> logger)
+    {
+        logger_ = std::move(logger); 
+    }
 
     // Processes a user. Logs an info message.
     void process_user(const std::string& username);

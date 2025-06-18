@@ -27,7 +27,7 @@ int main() {
     //     constexpr int32_t min2msec = 1000 * 60;
     //     constexpr int64_t multiplier = 100'000;
     //     while (cnt++ < minutes * min2msec * multiplier) {
-    //         // std::this_thread::sleep_for(1);
+    //         // std::this_thread::sleep_for(std::chrono::milliseconds(1));
     //     }
         
     //     return 0;
