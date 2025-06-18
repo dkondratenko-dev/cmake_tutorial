@@ -1,0 +1,4 @@
+ct_tree() {
+    tree -I "build" > t.txt
+}
+

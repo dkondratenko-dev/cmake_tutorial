@@ -21,3 +21,6 @@ Interface Injection: The class implements an interface that defines the dependen
 - Show cmake examples from the real projects
 
 - Memory leaks analysis
+    - Monitoring tools: https://sematext.com/blog/ubuntu-monitoring-tools/
+
+- Performance profilers

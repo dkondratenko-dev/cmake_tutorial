@@ -2,9 +2,35 @@
 
 This repository contains various examples and documentation related to C++ development, focusing on CMake, testing with Google Test, memory leak detection using tools like AddressSanitizer and Valgrind, and multi-target debugging.
 
+## Table of contents
+
+- [C++ Development Examples and Documentation](#c-development-examples-and-documentation)
+  - [Table of contents](#table-of-contents)
+  - [Repository Structure](#repository-structure)
+    - [CMake Cheat Sheet](#cmake-cheat-sheet)
+    - [CMake Examples](#cmake-examples)
+    - [Documents](#documents)
+      - [Dependency Injection Documentation](#dependency-injection-documentation)
+      - [Memory Leaks Documentation](#memory-leaks-documentation)
+      - [Agenda](#agenda)
+      - [Online Tools and AI Prompts](#online-tools-and-ai-prompts)
+      - [Performance Profiling](#performance-profiling)
+    - [Multi-Target Debugging](#multi-target-debugging)
+  - [Topics Covered](#topics-covered)
+    - [Memory Leak Detection](#memory-leak-detection)
+    - [Multi-Target Debugging](#multi-target-debugging-1)
+    - [Dependency Injection](#dependency-injection)
+    - [Testing with Google Test](#testing-with-google-test)
+  - [Getting Started](#getting-started)
+
+
 ## Repository Structure
 
 This section provides a brief overview of the main directories in this repository to help you navigate.
+
+### [CMake Cheat Sheet](documents/2025/cmake_cheat_sheet.md)
+
+- **A quick reference guide for CMake commands and configurations.**
 
 ### [CMake Examples](cmake-examples)
 
@@ -14,9 +40,27 @@ A collection of examples demonstrating how to use CMake for various C++ project 
 
 Contains various documentation, notes, and resources related to the project topics.
 
+#### [Dependency Injection Documentation](documents/2025/07_deps_interface_injection)
+
+- Documents explaining the differences between Dependency Injection (DI) and Dependency Inversion Principle (DIP).
+- Guides on interface injection techniques.
+
 #### [Memory Leaks Documentation](documents/2025/08_09_memory_leaks)
 
 Detailed documents on understanding, detecting, and preventing memory leaks using tools such as AddressSanitizer (ASan) and Valgrind. Includes notes on process monitoring.
+
+#### [Agenda](documents/2025/agenda)
+
+- Contains agendas for various meetings and sessions.
+
+#### [Online Tools and AI Prompts](documents/2025/online_tools_ai_promts)
+
+- Comparisons and approaches involving AI tools and prompts.
+- Mind maps and related documentation for AI prompts.
+
+#### [Performance Profiling](documents/2025/performance_profiling)
+
+- Documentation and images related to performance profiling techniques and tools.
 
 ### [Multi-Target Debugging](multi-target-debugging)
 
@@ -42,15 +86,14 @@ Learn how to debug applications with multiple targets or processes.
 
 Examples and documentation on implementing dependency injection in C++ projects to improve modularity and testability.
 
-- **[Dependency Injection Examples](cmake-examples/dependency-injection)**: Examples demonstrating dependency injection techniques in C++.
+- **[Dependency Injection Examples](cmake-examples/07-gtest-dependency-injection)**: Examples demonstrating dependency injection techniques in C++.
 
 ### Testing with Google Test
 
 Examples and guides on integrating and using Google Test for unit testing in C++ projects.
 
-- **[Google Test Examples](cmake-examples/google-test)**: Examples of setting up and writing tests using Google Test.
+- **[Google Test Examples](cmake-examples/06-google_test)**: Examples of setting up and writing tests using Google Test.
 
 ## Getting Started
 
 To get started with any of the examples or documentation, simply navigate to the relevant directory and explore the contents. Each directory contains its own set of examples, documentation, or resources to help you understand and implement the concepts covered.
-
