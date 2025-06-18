@@ -1,7 +1,7 @@
 Improvements:
 + Task the AI with developing source code examples within the FinTech domain.
 
-Monday 16/06:
+Wed 18/06:
 
 Dependency Injection:
 
