@@ -33,8 +33,8 @@ A collection of examples demonstrating how to use CMake for various C++ project 
 - **[05-using-libraries](cmake-examples/05-using-libraries)**: Example of using external libraries.
 - **[06-google_test](cmake-examples/06-google_test)**: Example of using Google Test for unit testing.
 - **[07-gtest-dependency-injection](cmake-examples/07-gtest-dependency-injection)**: Example demonstrating dependency injection techniques in C++.
-- **[08-memory-leak-asan](cmake-examples/08-memory-leak-asan)**: Example tailored for detection using AddressSanitizer.
-- **[09-top-continuous-memory-leak](cmake-examples/09-top-continuous-memory-leak)**: Example focusing on continuous memory growth scenarios.
+- **[08-top-continuous-memory-leak](cmake-examples/09-memory-leak-asan)**: Example focusing on continuous memory growth scenarios.
+- **[09-memory-leak-asan](cmake-examples/08-top-continious-memory-leak)**: Example tailored for detection using AddressSanitizer.
 
 ### Documents
 
