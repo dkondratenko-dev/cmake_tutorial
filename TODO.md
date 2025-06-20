@@ -10,10 +10,16 @@
 
 ## Next session
 
+### June 25 2025
+
+- [] Static code analysis
+- [] valgrind
+- [] chrono, rdtsc
+
 ### June 20 2025
 
 - [x] 08 <=> 09
-- [ ] Monitoring tools
-- [ ] ASAN
-- [ ] C++ AI roadmap
-- [ ] Performance profilers
+- [x] Monitoring tools
+- [x] ASAN
+- [x] C++ AI roadmap
+- [x] Performance profilers
