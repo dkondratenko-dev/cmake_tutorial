@@ -1,0 +1,157 @@
+# Why Fintech Systems Use `RDTSC` Instead of `std::chrono` for Benchmarking
+
+High-performance trading systems demand **nanosecond-level latency measurements**. In these environments, developers prefer using **low-level hardware instructions** such as `RDTSC` over high-level abstractions like `std::chrono`.
+
+---
+
+## `std::chrono`: High-Level and General-Purpose
+
+**Pros:**
+
+* Easy to use and read
+* Cross-platform and portable
+* Suitable for general-purpose performance analysis
+
+**Cons:**
+
+* Relatively high overhead
+* Limited precision (typically microseconds)
+* May involve system calls or be affected by OS scheduler
+* Not suitable for per-function or per-instruction level measurements
+
+---
+
+## `RDTSC`: Low-Level, Cycle-Accurate Timing
+
+**Pros:**
+
+* Reads the CPU's Time Stamp Counter (TSC)
+* Extremely low overhead (no syscall)
+* Accuracy up to CPU clock cycle
+* Suitable for measuring sub-microsecond latency
+
+**Cons:**
+
+* Depends on CPU architecture
+* Requires serialization (see below)
+* Can be inaccurate across cores or frequency changes
+
+**Typical Use Cases in Fintech:**
+
+* Benchmarking order book handling
+* Measuring latency of FIX message processing
+* Profiling time-critical path down to CPU cycles
+
+---
+
+## Code Example: Timing with `RDTSC` and `cpuid`
+
+```cpp
+#include <iostream>
+#include <x86intrin.h>
+
+inline uint64_t rdtsc_start() {
+    unsigned dummy;
+    __asm__ __volatile__("cpuid" : "=a"(dummy) : "a"(0) : "ebx", "ecx", "edx");
+    return __rdtsc();
+}
+
+inline uint64_t rdtsc_end() {
+    unsigned dummy;
+    uint64_t tsc = __rdtscp(&dummy);
+    __asm__ __volatile__("cpuid" : "=a"(dummy) : "a"(0) : "ebx", "ecx", "edx");
+    return tsc;
+}
+```
+
+---
+
+# Detailed Explanation of
+
+```cpp
+__asm__ __volatile__("cpuid" : "=a"(dummy) : "a"(0) : "ebx", "ecx", "edx");
+```
+
+This is a GCC inline assembly instruction used to **serialize** instruction execution before or after reading the CPU time-stamp counter.
+
+### Purpose of `cpuid`
+
+* Ensures that all previous instructions complete before continuing
+* Prevents the CPU from reordering instructions around `RDTSC`
+* Acts as a full serialization barrier
+
+### Explanation of Syntax
+
+| Part                    | Meaning                                                                    |
+| ----------------------- | -------------------------------------------------------------------------- |
+| `__asm__`               | GCC keyword to embed inline assembly                                       |
+| `__volatile__`          | Prevents compiler from optimizing or reordering this instruction           |
+| `"cpuid"`               | The assembly instruction to execute (CPU info + serialization)             |
+| `: "=a"(dummy)`         | Output operand: result from `EAX` is written to `dummy`                    |
+| `: "a"(0)`              | Input operand: place constant 0 into `EAX` before executing `cpuid`        |
+| `: "ebx", "ecx", "edx"` | Clobber list: these registers are modified, so compiler can't rely on them |
+
+### Operand Modifiers
+
+* `"=a"`: output into the `EAX` register
+* `"a"`: input to the `EAX` register
+* `"ebx"`, `"ecx"`, `"edx"`: declare that these registers will be used and possibly changed
+
+---
+
+## Summary of Registers Used
+
+| Register | Purpose                                                        |
+| -------- | -------------------------------------------------------------- |
+| `EAX`    | Input/output for CPU feature ID (set to 0 here for basic info) |
+| `EBX`    | Used and modified by `cpuid`, needs to be clobbered            |
+| `ECX`    | Same                                                           |
+| `EDX`    | Same                                                           |
+
+
+## How to convert CPU cycles to time
+
+
+## 1\. What is a Clock Cycle in Simple Terms?
+
+Imagine the processor as an orchestra conductor. Each clock cycle is a wave of the conductor's baton, after which all instruments (processor operations) act simultaneously. The clock frequency (the number of "waves" per second) determines how fast the processor works.
+
+## 2\. How the Duration of One Clock Cycle is Calculated
+
+**Formula:**
+
+```
+1 clock cycle = 1 / processor frequency
+```
+
+**For example:**
+
+| Frequency | Duration of one clock cycle |
+|-----------|-----------------------------|
+| 1 GHz     | 1 / 1,000,000,000 = 1 ns    |
+| 2.5 GHz   | 1 / 2,500,000,000 = 0.4 ns  |
+| 4.2 GHz   | 1 / 4,200,000,000 ≈ 0.238 ns|
+
+---
+
+## Where to Learn More
+
+### Intel Manuals
+
+* **Intel® 64 and IA-32 Architectures Software Developer’s Manual**
+  Volume 2 (Instruction Set Reference):
+  [https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html](https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html)
+  Look up: `CPUID`, `RDTSC`, `RDTSCP`
+
+### GCC Inline Assembly
+
+* GCC Extended Asm Syntax:
+  [https://gcc.gnu.org/onlinedocs/gcc/Extended-Asm.html](https://gcc.gnu.org/onlinedocs/gcc/Extended-Asm.html)
+
+### Optimization and Performance Guides
+
+* Agner Fog’s Optimization Manuals:
+  [https://www.agner.org/optimize/](https://www.agner.org/optimize/)
+
+* LLVM/Clang: Precise Performance Analysis PDF:
+  [https://llvm.org/devmtg/2020-09/slides/UsingLLVMForPerformanceAnalysis.pdf](https://llvm.org/devmtg/2020-09/slides/UsingLLVMForPerformanceAnalysis.pdf)

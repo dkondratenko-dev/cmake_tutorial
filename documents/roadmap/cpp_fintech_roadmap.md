@@ -20,9 +20,9 @@ From Professional C# Developer to C++ Fintech Engineer
 
 - [ ] Stack vs Heap
 - [ ] new / delete (raw pointers)
-- [ ] RAII: Resource Acquisition Is Initialization
+- [ ] Pointer*p reference& Obj* pi; Obj& ri; ri.function(), pi->function();
 - [ ] Smart pointers: unique_ptr, shared_ptr, weak_ptr
-- [ ] std::move and rvalue references
+- [ ] std::move and rvalue\lvalue references
 
 ### Object-Oriented Programming
 
