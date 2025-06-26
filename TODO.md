@@ -10,16 +10,20 @@
 
 ## Next session
 
-### June 27 2025
+### Wed July 2 2025
 
-- [] Static code analysis
+- [] 1
+
+### Fri June 27 2025
+
 - [] valgrind
 - [] chrono, rdtsc
+- [] Static code analysis
 
-### June 25 2025
+### Wed June 25 2025
 
-- [] ASAN
-- []  Fixing memory leaks
+- [x] ASAN
+- [x] Fixing memory leaks
 
 ### June 20 2025
 

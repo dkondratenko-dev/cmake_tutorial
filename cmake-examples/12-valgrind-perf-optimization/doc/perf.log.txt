@@ -1,0 +1,877 @@
+--------------------------------------------------------------------------------
+Profile data file 'callgrind.out.2753851' (creator: callgrind-3.22.0)
+--------------------------------------------------------------------------------
+I1 cache: 
+D1 cache: 
+LL cache: 
+Timerange: Basic block 0 - 1885125395
+Trigger: Program termination
+Profiled target:  ./option_pricer_naive (PID 2753851, part 1)
+Events recorded:  Ir
+Events shown:     Ir
+Event sort order: Ir
+Thresholds:       99
+Include dirs:     
+User annotated:   ../src/naive.cpp
+Auto-annotation:  on
+
+--------------------------------------------------------------------------------
+Ir                      
+--------------------------------------------------------------------------------
+17,671,977,276 (100.0%)  PROGRAM TOTALS
+
+--------------------------------------------------------------------------------
+Ir                      file:function
+--------------------------------------------------------------------------------
+5,112,838,347 (28.93%)  /usr/include/c++/13/bits/random.tcc:std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>::_M_gen_rand() [/home/dkondratenko/Documents/uw/Femi/github/cmake_tutorial/cmake-examples/12-valgrind-perf-optimization/build/option_pricer_naive]
+3,772,944,000 (21.35%)  /usr/include/c++/13/bits/random.tcc:std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>::seed(unsigned long) [/home/dkondratenko/Documents/uw/Femi/github/cmake_tutorial/cmake-examples/12-valgrind-perf-optimization/build/option_pricer_naive]
+3,139,920,000 (17.77%)  /usr/include/c++/13/bits/random.h:std::__detail::_Mod<unsigned long, 624ul, 1ul, 0ul, true, true>::__calc(unsigned long) [/home/dkondratenko/Documents/uw/Femi/github/cmake_tutorial/cmake-examples/12-valgrind-perf-optimization/build/option_pricer_naive]
+1,729,728,000 ( 9.79%)  /usr/include/c++/13/bits/random.h:std::__detail::_Mod<unsigned long, 4294967296ul, 1ul, 0ul, true, true>::__calc(unsigned long) [/home/dkondratenko/Documents/uw/Femi/github/cmake_tutorial/cmake-examples/12-valgrind-perf-optimization/build/option_pricer_naive]
+1,729,728,000 ( 9.79%)  /usr/include/c++/13/bits/random.h:unsigned long std::__detail::__mod<unsigned long, 4294967296ul, 1ul, 0ul>(unsigned long) [/home/dkondratenko/Documents/uw/Femi/github/cmake_tutorial/cmake-examples/12-valgrind-perf-optimization/build/option_pricer_naive]
+1,726,956,000 ( 9.77%)  /usr/include/c++/13/bits/random.h:unsigned long std::__detail::__mod<unsigned long, 624ul, 1ul, 0ul>(unsigned long) [/home/dkondratenko/Documents/uw/Femi/github/cmake_tutorial/cmake-examples/12-valgrind-perf-optimization/build/option_pricer_naive]
+   81,426,304 ( 0.46%)  /usr/include/c++/13/bits/random.tcc:double std::generate_canonical<double, 53ul, std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul> >(std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>&) [/home/dkondratenko/Documents/uw/Femi/github/cmake_tutorial/cmake-examples/12-valgrind-perf-optimization/build/option_pricer_naive]
+   45,636,640 ( 0.26%)  /usr/include/c++/13/bits/random.tcc:std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>::operator()() [/home/dkondratenko/Documents/uw/Femi/github/cmake_tutorial/cmake-examples/12-valgrind-perf-optimization/build/option_pricer_naive]
+   26,928,384 ( 0.15%)  ./math/../sysdeps/x86_64/fpu/e_logl.S:__ieee754_logl [/usr/lib/x86_64-linux-gnu/libm.so.6]
+   23,890,400 ( 0.14%)  /usr/include/c++/13/bits/random.tcc:double std::normal_distribution<double>::operator()<std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul> >(std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>&, std::normal_distribution<double>::param_type const&) [/home/dkondratenko/Documents/uw/Femi/github/cmake_tutorial/cmake-examples/12-valgrind-perf-optimization/build/option_pricer_naive]
+   16,669,952 ( 0.09%)  ./math/./math/w_logl_compat.c:logl [/usr/lib/x86_64-linux-gnu/libm.so.6]
+   12,600,000 ( 0.07%)  ???:std::random_device::_M_init(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) [/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.33]
+   12,096,000 ( 0.07%)  /usr/include/c++/13/bits/basic_string.tcc:void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char const*>(char const*, char const*, std::forward_iterator_tag) [/home/dkondratenko/Documents/uw/Femi/github/cmake_tutorial/cmake-examples/12-valgrind-perf-optimization/build/option_pricer_naive]
+   11,844,000 ( 0.07%)  /home/dkondratenko/Documents/uw/Femi/github/cmake_tutorial/cmake-examples/12-valgrind-perf-optimization/src/naive.cpp:generate_normal_random() [/home/dkondratenko/Documents/uw/Femi/github/cmake_tutorial/cmake-examples/12-valgrind-perf-optimization/build/option_pricer_naive]
+   11,544,969 ( 0.07%)  ./math/../sysdeps/ieee754/dbl-64/e_log.c:__ieee754_log_fma [/usr/lib/x86_64-linux-gnu/libm.so.6]
+   11,540,736 ( 0.07%)  /usr/include/c++/13/cmath:std::log(long double) [/home/dkondratenko/Documents/uw/Femi/github/cmake_tutorial/cmake-examples/12-valgrind-perf-optimization/build/option_pricer_naive]
+   10,836,000 ( 0.06%)  ???:std::random_device::_M_getval() [/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.33]
+    9,744,280 ( 0.06%)  /usr/include/c++/13/bits/stl_algobase.h:unsigned long const& std::max<unsigned long>(unsigned long const&, unsigned long const&) [/home/dkondratenko/Documents/uw/Femi/github/cmake_tutorial/cmake-examples/12-valgrind-perf-optimization/build/option_pricer_naive]
+    9,072,000 ( 0.05%)  /usr/include/c++/13/bits/basic_string.h:std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string<std::allocator<char> >(char const*, std::allocator<char> const&) [/home/dkondratenko/Documents/uw/Femi/github/cmake_tutorial/cmake-examples/12-valgrind-perf-optimization/build/option_pricer_naive]
+
+--------------------------------------------------------------------------------
+-- Auto-annotated source: /usr/include/c++/13/bits/basic_string.h
+--------------------------------------------------------------------------------
+Ir                 
+
+-- line 347 ----------------------------------------
+        .                 void
+        .                 _M_init_local_buf() _GLIBCXX_NOEXCEPT
+        .                 {
+        .           #if __cpp_lib_is_constant_evaluated
+        .           	if (std::is_constant_evaluated())
+        .           	  for (size_type __i = 0; __i <= _S_local_capacity; ++__i)
+        .           	    _M_local_buf[__i] = _CharT();
+        .           #endif
+  252,000 ( 0.00%)        }
+        .           
+        .                 __attribute__((__always_inline__))
+        .                 _GLIBCXX14_CONSTEXPR
+        .                 pointer
+        .                 _M_use_local_data() _GLIBCXX_NOEXCEPT
+        .                 {
+        .           #if __cpp_lib_is_constant_evaluated
+        .           	_M_init_local_buf();
+-- line 363 ----------------------------------------
+-- line 633 ----------------------------------------
+        .                  *  @param  __a  Allocator to use (default is default allocator).
+        .                  */
+        .           #if __cpp_deduction_guides && ! defined _GLIBCXX_DEFINING_STRING_INSTANTIATIONS
+        .                 // _GLIBCXX_RESOLVE_LIB_DEFECTS
+        .                 // 3076. basic_string CTAD ambiguity
+        .                 template<typename = _RequireAllocator<_Alloc>>
+        .           #endif
+        .                 _GLIBCXX20_CONSTEXPR
+2,016,000 ( 0.01%)        basic_string(const _CharT* __s, const _Alloc& __a = _Alloc())
+2,520,000 ( 0.01%)        : _M_dataplus(_M_local_data(), __a)
+1,260,000 ( 0.01%)  => ???:0x000000000010a2d0 (252,000x)
+1,260,000 ( 0.01%)  => ???:0x000000000010a350 (252,000x)
+        .                 {
+        .           	// NB: Not required, but considered best practice.
+  504,000 ( 0.00%)  	if (__s == 0)
+        .           	  std::__throw_logic_error(__N("basic_string: "
+        .           				       "construction from null is not valid"));
+1,512,000 ( 0.01%)  	const _CharT* __end = __s + traits_type::length(__s);
+9,072,000 ( 0.05%)  => /usr/include/c++/13/bits/char_traits.h:std::char_traits<char>::length(char const*) (252,000x)
+1,512,000 ( 0.01%)  	_M_construct(__s, __end, forward_iterator_tag());
+29,737,056 ( 0.17%)  => /usr/include/c++/13/bits/basic_string.tcc:void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char const*>(char const*, char const*, std::forward_iterator_tag) (252,000x)
+1,008,000 ( 0.01%)        }
+        .           
+        .                 /**
+        .                  *  @brief  Construct string as multiple characters.
+        .                  *  @param  __n  Number of characters.
+        .                  *  @param  __c  Character to use.
+        .                  *  @param  __a  Allocator to use (default is default allocator).
+        .                  */
+        .           #if __cpp_deduction_guides && ! defined _GLIBCXX_DEFINING_STRING_INSTANTIATIONS
+-- line 658 ----------------------------------------
+
+--------------------------------------------------------------------------------
+-- Auto-annotated source: /usr/include/c++/13/bits/random.h
+--------------------------------------------------------------------------------
+Ir                     
+
+-- line 131 ----------------------------------------
+            .           
+            .               // Special cases:
+            .               // - for m == 2^n or m == 0, unsigned integer overflow is safe.
+            .               // - a * (m - 1) + c fits in _Tp, there is no overflow.
+            .               template<typename _Tp, _Tp __m, _Tp __a, _Tp __c, bool __s>
+            .                 struct _Mod<_Tp, __m, __a, __c, true, __s>
+            .                 {
+            .           	static _Tp
+1,256,976,000 ( 7.11%)  	__calc(_Tp __x)
+            .           	{
+  628,488,000 ( 3.56%)  	  _Tp __res = __a * __x + __c;
+            .           	  if (__m)
+2,041,452,000 (11.55%)  	    __res %= __m;
+  314,244,000 ( 1.78%)  	  return __res;
+  628,488,000 ( 3.56%)  	}
+            .                 };
+            .           
+            .               template<typename _Tp, _Tp __m, _Tp __a = 1, _Tp __c = 0>
+            .                 inline _Tp
+1,571,220,000 ( 8.89%)        __mod(_Tp __x)
+            .                 {
+            .           	if _GLIBCXX17_CONSTEXPR (__a == 0)
+            .           	  return __c;
+            .           	else
+            .           	  {
+            .           	    // _Mod must not be instantiated with a == 0
+  314,244,000 ( 1.78%)  	    constexpr _Tp __a1 = __a ? __a : 1;
+  942,732,000 ( 5.33%)  	    return _Mod<_Tp, __m, __a1, __c>::__calc(__x);
+3,139,920,000 (17.77%)  => /usr/include/c++/13/bits/random.h:std::__detail::_Mod<unsigned long, 624ul, 1ul, 0ul, true, true>::__calc(unsigned long) (156,996,000x)
+            .           	  }
+  628,488,000 ( 3.56%)        }
+            .           
+            .               /*
+            .                * An adaptor class for converting the output of any Generator into
+            .                * the input for a specific Distribution.
+            .                */
+            .               template<typename _Engine, typename _DInputType>
+            .                 struct _Adaptor
+            .                 {
+            .           	static_assert(std::is_floating_point<_DInputType>::value,
+            .           		      "template argument must be a floating point type");
+            .           
+            .                 public:
+    1,260,000 ( 0.01%)  	_Adaptor(_Engine& __g)
+    1,512,000 ( 0.01%)  	: _M_g(__g) { }
+            .           
+            .           	_DInputType
+            .           	min() const
+            .           	{ return _DInputType(0); }
+            .           
+            .           	_DInputType
+            .           	max() const
+            .           	{ return _DInputType(1); }
+            .           
+            .           	/*
+            .           	 * Converts a value generated by the adapted random number generator
+            .           	 * into a value in the input domain for the dependent random number
+            .           	 * distribution.
+            .           	 */
+            .           	_DInputType
+    3,205,760 ( 0.02%)  	operator()()
+            .           	{
+            .           	  return std::generate_canonical<_DInputType,
+            .           	                            std::numeric_limits<_DInputType>::digits,
+    2,564,608 ( 0.01%)  	                            _Engine>(_M_g);
+5,314,916,075 (30.08%)  => /usr/include/c++/13/bits/random.tcc:double std::generate_canonical<double, 53ul, std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul> >(std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>&) (641,152x)
+    1,282,304 ( 0.01%)  	}
+            .           
+            .                 private:
+            .           	_Engine& _M_g;
+            .                 };
+            .           
+            .               // Detect whether a template argument _Sseq is a valid seed sequence for
+            .               // a random number engine _Engine with result type _Res.
+            .               // Used to constrain _Engine::_Engine(_Sseq&) and _Engine::seed(_Sseq&)
+-- line 203 ----------------------------------------
+-- line 537 ----------------------------------------
+            .                 static constexpr result_type initialization_multiplier = __f;
+            .                 static constexpr result_type default_seed = 5489u;
+            .           
+            .                 // constructors and member functions
+            .           
+            .                 mersenne_twister_engine() : mersenne_twister_engine(default_seed) { }
+            .           
+            .                 explicit
+    1,512,000 ( 0.01%)        mersenne_twister_engine(result_type __sd)
+    2,016,000 ( 0.01%)        { seed(__sd); }
+12,099,276,000 (68.47%)  => /usr/include/c++/13/bits/random.tcc:std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>::seed(unsigned long) (252,000x)
+            .           
+            .                 /**
+            .                  * @brief Constructs a %mersenne_twister_engine random number generator
+            .                  *        engine seeded from the seed sequence @p __q.
+            .                  *
+            .                  * @param __q the seed sequence.
+            .                  */
+            .                 template<typename _Sseq, typename = _If_seed_seq<_Sseq>>
+-- line 554 ----------------------------------------
+-- line 562 ----------------------------------------
+            .                 template<typename _Sseq>
+            .                   _If_seed_seq<_Sseq>
+            .                   seed(_Sseq& __q);
+            .           
+            .                 /**
+            .                  * @brief Gets the smallest possible value in the output range.
+            .                  */
+            .                 static constexpr result_type
+    3,846,912 ( 0.02%)        min()
+    3,846,912 ( 0.02%)        { return 0; }
+            .           
+            .                 /**
+            .                  * @brief Gets the largest possible value in the output range.
+            .                  */
+            .                 static constexpr result_type
+            .                 max()
+            .                 { return __detail::_Shift<_UIntType, __w>::__value - 1; }
+            .           
+-- line 579 ----------------------------------------
+-- line 1650 ----------------------------------------
+            .             class random_device
+            .             {
+            .             public:
+            .               /** The type of the generated random value. */
+            .               typedef unsigned int result_type;
+            .           
+            .               // constructors, destructors and member functions
+            .           
+    8,064,000 ( 0.05%)      random_device() { _M_init("default"); }
+   50,401,056 ( 0.29%)  => /usr/include/c++/13/bits/basic_string.h:std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string<std::allocator<char> >(char const*, std::allocator<char> const&) (252,000x)
+   13,104,000 ( 0.07%)  => ???:0x000000000010a3c0 (252,000x)
+    2,016,000 ( 0.01%)  => ???:0x000000000010a280 (252,000x)
+            .           
+            .               explicit
+            .               random_device(const std::string& __token) { _M_init(__token); }
+            .           
+    1,260,000 ( 0.01%)      ~random_device()
+    1,512,000 ( 0.01%)      { _M_fini(); }
+    1,512,000 ( 0.01%)  => ???:0x000000000010a300 (252,000x)
+            .           
+            .               static constexpr result_type
+            .               min()
+            .               { return std::numeric_limits<result_type>::min(); }
+            .           
+            .               static constexpr result_type
+            .               max()
+            .               { return std::numeric_limits<result_type>::max(); }
+            .           
+            .               double
+            .               entropy() const noexcept
+            .               { return this->_M_getentropy(); }
+            .           
+            .               result_type
+    1,260,000 ( 0.01%)      operator()()
+    1,260,000 ( 0.01%)      { return this->_M_getval(); }
+   11,340,000 ( 0.06%)  => ???:0x000000000010a3a0 (252,000x)
+            .           
+            .               // No copy functions.
+            .               random_device(const random_device&) = delete;
+            .               void operator=(const random_device&) = delete;
+            .           
+            .             private:
+            .           
+            .               void _M_init(const std::string& __token);
+-- line 1688 ----------------------------------------
+-- line 2025 ----------------------------------------
+            .                 /** Parameter type. */
+            .                 struct param_type
+            .                 {
+            .           	typedef normal_distribution<_RealType> distribution_type;
+            .           
+            .           	param_type() : param_type(0.0) { }
+            .           
+            .           	explicit
+    1,764,000 ( 0.01%)  	param_type(_RealType __mean, _RealType __stddev = _RealType(1))
+    1,512,000 ( 0.01%)  	: _M_mean(__mean), _M_stddev(__stddev)
+            .           	{
+    1,260,000 ( 0.01%)  	  __glibcxx_assert(_M_stddev > _RealType(0));
+    1,512,000 ( 0.01%)  => /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h:std::__is_constant_evaluated() (252,000x)
+      756,000 ( 0.00%)  	}
+            .           
+            .           	_RealType
+    1,008,000 ( 0.01%)  	mean() const
+    1,008,000 ( 0.01%)  	{ return _M_mean; }
+            .           
+            .           	_RealType
+    1,008,000 ( 0.01%)  	stddev() const
+    1,008,000 ( 0.01%)  	{ return _M_stddev; }
+            .           
+            .           	friend bool
+            .           	operator==(const param_type& __p1, const param_type& __p2)
+            .           	{ return (__p1._M_mean == __p2._M_mean
+            .           		  && __p1._M_stddev == __p2._M_stddev); }
+            .           
+            .           #if __cpp_impl_three_way_comparison < 201907L
+            .           	friend bool
+-- line 2053 ----------------------------------------
+-- line 2063 ----------------------------------------
+            .               public:
+            .                 normal_distribution() : normal_distribution(0.0) { }
+            .           
+            .                 /**
+            .                  * Constructs a normal distribution with parameters @f$mean@f$ and
+            .                  * standard deviation.
+            .                  */
+            .                 explicit
+    1,764,000 ( 0.01%)        normal_distribution(result_type __mean,
+            .           			  result_type __stddev = result_type(1))
+    3,024,000 ( 0.02%)        : _M_param(__mean, __stddev)
+    6,804,000 ( 0.04%)  => /usr/include/c++/13/bits/random.h:std::normal_distribution<double>::param_type::param_type(double, double) (252,000x)
+      756,000 ( 0.00%)        { }
+            .           
+            .                 explicit
+            .                 normal_distribution(const param_type& __p)
+            .                 : _M_param(__p)
+            .                 { }
+            .           
+            .                 /**
+            .                  * @brief Resets the distribution state.
+-- line 2082 ----------------------------------------
+-- line 2128 ----------------------------------------
+            .                 max() const
+            .                 { return std::numeric_limits<result_type>::max(); }
+            .           
+            .                 /**
+            .                  * @brief Generating functions.
+            .                  */
+            .                 template<typename _UniformRandomNumberGenerator>
+            .           	result_type
+    1,512,000 ( 0.01%)  	operator()(_UniformRandomNumberGenerator& __urng)
+    2,016,000 ( 0.01%)  	{ return this->operator()(__urng, _M_param); }
+5,369,248,116 (30.38%)  => /usr/include/c++/13/bits/random.tcc:double std::normal_distribution<double>::operator()<std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul> >(std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>&, std::normal_distribution<double>::param_type const&) (252,000x)
+            .           
+            .                 template<typename _UniformRandomNumberGenerator>
+            .           	result_type
+            .           	operator()(_UniformRandomNumberGenerator& __urng,
+            .           		   const param_type& __p);
+            .           
+            .                 template<typename _ForwardIterator,
+            .           	       typename _UniformRandomNumberGenerator>
+-- line 2145 ----------------------------------------
+
+--------------------------------------------------------------------------------
+-- User-annotated source: ../src/naive.cpp
+--------------------------------------------------------------------------------
+  No information has been collected for ../src/naive.cpp
+
+--------------------------------------------------------------------------------
+-- Auto-annotated source: /usr/include/c++/13/bits/stl_algobase.h
+--------------------------------------------------------------------------------
+Ir                 
+
+-- line 225 ----------------------------------------
+        .              *
+        .              *  This is the simple classic generic implementation.  It will work on
+        .              *  temporary expressions, since they are only evaluated once, unlike a
+        .              *  preprocessor macro.
+        .             */
+        .             template<typename _Tp>
+        .               _GLIBCXX14_CONSTEXPR
+        .               inline const _Tp&
+   90,000 ( 0.00%)      min(const _Tp& __a, const _Tp& __b)
+        .               {
+        .                 // concept requirements
+        .                 __glibcxx_function_requires(_LessThanComparableConcept<_Tp>)
+        .                 //return __b < __a ? __b : __a;
+  108,000 ( 0.00%)        if (__b < __a)
+        .           	return __b;
+   18,000 ( 0.00%)        return __a;
+   36,000 ( 0.00%)      }
+        .           
+        .             /**
+        .              *  @brief This does what you think it does.
+        .              *  @ingroup sorting_algorithms
+        .              *  @param  __a  A thing of arbitrary type.
+        .              *  @param  __b  Another thing of arbitrary type.
+        .              *  @return   The greater of the parameters.
+        .              *
+        .              *  This is the simple classic generic implementation.  It will work on
+        .              *  temporary expressions, since they are only evaluated once, unlike a
+        .              *  preprocessor macro.
+        .             */
+        .             template<typename _Tp>
+        .               _GLIBCXX14_CONSTEXPR
+        .               inline const _Tp&
+3,255,760 ( 0.02%)      max(const _Tp& __a, const _Tp& __b)
+        .               {
+        .                 // concept requirements
+        .                 __glibcxx_function_requires(_LessThanComparableConcept<_Tp>)
+        .                 //return  __a < __b ? __b : __a;
+3,906,912 ( 0.02%)        if (__a < __b)
+1,285,362 ( 0.01%)  	return __b;
+    8,471 ( 0.00%)        return __a;
+1,302,304 ( 0.01%)      }
+        .           
+        .             /**
+        .              *  @brief This does what you think it does.
+        .              *  @ingroup sorting_algorithms
+        .              *  @param  __a  A thing of arbitrary type.
+        .              *  @param  __b  Another thing of arbitrary type.
+        .              *  @param  __comp  A @link comparison_functors comparison functor@endlink.
+        .              *  @return   The lesser of the parameters.
+-- line 273 ----------------------------------------
+-- line 308 ----------------------------------------
+        .                 return __a;
+        .               }
+        .           
+        .             // Fallback implementation of the function in bits/stl_iterator.h used to
+        .             // remove the __normal_iterator wrapper. See copy, fill, ...
+        .             template<typename _Iterator>
+        .               _GLIBCXX20_CONSTEXPR
+        .               inline _Iterator
+  216,000 ( 0.00%)      __niter_base(_Iterator __it)
+        .               _GLIBCXX_NOEXCEPT_IF(std::is_nothrow_copy_constructible<_Iterator>::value)
+  162,000 ( 0.00%)      { return __it; }
+        .           
+        .             template<typename _Ite, typename _Seq>
+        .               _Ite
+        .               __niter_base(const ::__gnu_debug::_Safe_iterator<_Ite, _Seq,
+        .           		 std::random_access_iterator_tag>&);
+        .           
+        .             // Reverse the __niter_base transformation to get a
+        .             // __normal_iterator back again (this assumes that __normal_iterator
+-- line 326 ----------------------------------------
+
+--------------------------------------------------------------------------------
+-- Auto-annotated source: /usr/include/c++/13/cmath
+--------------------------------------------------------------------------------
+Ir                  
+
+-- line 319 ----------------------------------------
+         .           
+         .           #ifndef __CORRECT_ISO_CPP_MATH_H_PROTO
+         .             inline _GLIBCXX_CONSTEXPR float
+         .             log(float __x)
+         .             { return __builtin_logf(__x); }
+         .           
+         .             inline _GLIBCXX_CONSTEXPR long double
+         .             log(long double __x)
+11,540,736 ( 0.07%)    { return __builtin_logl(__x); }
+46,162,944 ( 0.26%)  => ???:0x000000000010a260 (1,282,304x)
+         .           #endif
+         .           
+         .             template<typename _Tp>
+         .               inline _GLIBCXX_CONSTEXPR
+         .               typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value, 
+         .                                               double>::__type
+         .               log(_Tp __x)
+         .               { return __builtin_log(__x); }
+-- line 335 ----------------------------------------
+
+--------------------------------------------------------------------------------
+-- Auto-annotated source: /usr/include/c++/13/bits/basic_string.tcc
+--------------------------------------------------------------------------------
+Ir                 
+
+-- line 213 ----------------------------------------
+        .           
+        .           	_M_set_length(__len);
+        .                 }
+        .           
+        .             template<typename _CharT, typename _Traits, typename _Alloc>
+        .               template<typename _InIterator>
+        .                 _GLIBCXX20_CONSTEXPR
+        .                 void
+3,528,000 ( 0.02%)        basic_string<_CharT, _Traits, _Alloc>::
+        .                 _M_construct(_InIterator __beg, _InIterator __end,
+        .           		   std::forward_iterator_tag)
+        .                 {
+  252,000 ( 0.00%)  	size_type __dnew = static_cast<size_type>(std::distance(__beg, __end));
+        .           
+  756,000 ( 0.00%)  	if (__dnew > size_type(_S_local_capacity))
+        .           	  {
+        .           	    _M_data(_M_create(__dnew, size_type(0)));
+  504,000 ( 0.00%)  	    _M_capacity(__dnew);
+        .           	  }
+        .           	else
+        .           	  _M_init_local_buf();
+        .           
+        .           	// Check for out_of_range and length_error exceptions.
+        .           	struct _Guard
+        .           	{
+        .           	  _GLIBCXX20_CONSTEXPR
+2,772,000 ( 0.02%)  	  explicit _Guard(basic_string* __s) : _M_guarded(__s) { }
+        .           
+        .           	  _GLIBCXX20_CONSTEXPR
+3,024,000 ( 0.02%)  	  ~_Guard() { if (_M_guarded) _M_guarded->_M_dispose(); }
+        .           
+        .           	  basic_string* _M_guarded;
+1,260,000 ( 0.01%)  	} __guard(this);
+2,772,000 ( 0.02%)  => /usr/include/c++/13/bits/basic_string.tcc:std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char const*>(char const*, char const*, std::forward_iterator_tag)::_Guard::_Guard(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >*) (252,000x)
+        .           
+2,268,000 ( 0.01%)  	this->_S_copy_chars(_M_data(), __beg, __end);
+6,553,056 ( 0.04%)  => ???:0x000000000010a370 (252,000x)
+1,260,000 ( 0.01%)  => ???:0x000000000010a360 (252,000x)
+        .           
+  252,000 ( 0.00%)  	__guard._M_guarded = 0;
+        .           
+1,260,000 ( 0.01%)  	_M_set_length(__dnew);
+1,764,000 ( 0.01%)  => ???:0x000000000010a290 (252,000x)
+2,016,000 ( 0.01%)        }
+3,024,000 ( 0.02%)  => /usr/include/c++/13/bits/basic_string.tcc:std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char const*>(char const*, char const*, std::forward_iterator_tag)::_Guard::~_Guard() (252,000x)
+        .           
+        .             template<typename _CharT, typename _Traits, typename _Alloc>
+        .               _GLIBCXX20_CONSTEXPR
+        .               void
+        .               basic_string<_CharT, _Traits, _Alloc>::
+        .               _M_construct(size_type __n, _CharT __c)
+        .               {
+        .                 if (__n > size_type(_S_local_capacity))
+-- line 260 ----------------------------------------
+
+--------------------------------------------------------------------------------
+-- Auto-annotated source: /home/dkondratenko/Documents/uw/Femi/github/cmake_tutorial/cmake-examples/12-valgrind-perf-optimization/src/naive.cpp
+--------------------------------------------------------------------------------
+Ir                 
+
+-- line 14 ----------------------------------------
+        .               double volatility;    // sigma
+        .               double time_to_maturity; // T in years
+        .               int num_simulations;
+        .               int num_steps;
+        .           };
+        .           
+        .           // BAD: This function creates and seeds a new generator on every call.
+        .           // This is a major performance killer in a loop.
+3,024,000 ( 0.02%)  double generate_normal_random() {
+        .               // Static to ensure it's only seeded once per program run,
+        .               // but a new distribution is created on each call, which is still inefficient.
+        .               // A better naive example would put this whole block inside the function without static.
+        .               // For a clearer bad example, let's pretend we are creating the engine every time.
+  756,000 ( 0.00%)      std::random_device rd;
+76,861,056 ( 0.43%)  => /usr/include/c++/13/bits/random.h:std::random_device::random_device() (252,000x)
+2,016,000 ( 0.01%)      std::mt19937 gen(rd());
+12,102,804,000 (68.49%)  => /usr/include/c++/13/bits/random.h:std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>::mersenne_twister_engine(unsigned long) (252,000x)
+13,860,000 ( 0.08%)  => /usr/include/c++/13/bits/random.h:std::random_device::operator()() (252,000x)
+1,764,000 ( 0.01%)      std::normal_distribution<> d(0.0, 1.0);
+12,348,000 ( 0.07%)  => /usr/include/c++/13/bits/random.h:std::normal_distribution<double>::normal_distribution(double, double) (252,000x)
+2,016,000 ( 0.01%)      return d(gen);
+5,372,776,116 (30.40%)  => /usr/include/c++/13/bits/random.h:double std::normal_distribution<double>::operator()<std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul> >(std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>&) (252,000x)
+2,268,000 ( 0.01%)  }
+4,284,000 ( 0.02%)  => /usr/include/c++/13/bits/random.h:std::random_device::~random_device() (252,000x)
+        .           
+        9 ( 0.00%)  double run_monte_carlo(const OptionData& data) {
+        2 ( 0.00%)      double total_payoff = 0.0;
+        8 ( 0.00%)      double dt = data.time_to_maturity / data.num_steps;
+       13 ( 0.00%)      double drift = (data.risk_free_rate - 0.5 * data.volatility * data.volatility) * dt;
+        8 ( 0.00%)      double diffusion = data.volatility * std::sqrt(dt);
+       10 ( 0.00%)  => ???:0x000000000010a2c0 (1x)
+        .           
+    5,006 ( 0.00%)      for (int i = 0; i < data.num_simulations; ++i) {
+        .                   // VERY BAD: Unnecessary heap allocation in a tight loop.
+        .                   // We only need the final price, not the whole path.
+    3,000 ( 0.00%)          std::vector<double> path;
+   52,000 ( 0.00%)  => /usr/include/c++/13/bits/stl_vector.h:std::vector<double, std::allocator<double> >::vector() (1,000x)
+    5,000 ( 0.00%)          path.push_back(data.initial_price);
+  863,142 ( 0.00%)  => /usr/include/c++/13/bits/stl_vector.h:std::vector<double, std::allocator<double> >::push_back(double const&) (1,000x)
+        .           
+1,266,000 ( 0.01%)          for (int j = 0; j < data.num_steps; ++j) {
+  756,000 ( 0.00%)              double epsilon = generate_normal_random(); // Inefficient call
+17,594,777,172 (99.56%)  => /home/dkondratenko/Documents/uw/Femi/github/cmake_tutorial/cmake-examples/12-valgrind-perf-optimization/src/naive.cpp:generate_normal_random() (252,000x)
+3,276,000 ( 0.02%)              double next_price = path.back() * std::exp(drift + diffusion * epsilon);
+26,208,000 ( 0.15%)  => /usr/include/c++/13/bits/stl_vector.h:std::vector<double, std::allocator<double> >::back() (252,000x)
+15,120,000 ( 0.09%)  => ???:0x000000000010a3e0 (252,000x)
+1,260,000 ( 0.01%)              path.push_back(next_price);
+25,977,464 ( 0.15%)  => /usr/include/c++/13/bits/stl_vector.h:std::vector<double, std::allocator<double> >::push_back(double const&) (252,000x)
+        .                   }
+        .           
+        .                   // Calculate payoff for this single simulation
+    5,000 ( 0.00%)          double final_price = path.back();
+  104,000 ( 0.00%)  => /usr/include/c++/13/bits/stl_vector.h:std::vector<double, std::allocator<double> >::back() (1,000x)
+   14,000 ( 0.00%)          double payoff = std::max(final_price - data.strike_price, 0.0);
+   14,529 ( 0.00%)  => /usr/include/c++/13/bits/stl_algobase.h:double const& std::max<double>(double const&, double const&) (1,000x)
+    3,000 ( 0.00%)          total_payoff += payoff;
+    3,000 ( 0.00%)      }
+  304,000 ( 0.00%)  => /usr/include/c++/13/bits/stl_vector.h:std::vector<double, std::allocator<double> >::~vector() (1,000x)
+        .           
+        7 ( 0.00%)      double mean_payoff = total_payoff / data.num_simulations;
+       13 ( 0.00%)      double discounted_price = mean_payoff * std::exp(-data.risk_free_rate * data.time_to_maturity);
+       60 ( 0.00%)  => ???:0x000000000010a3e0 (1x)
+        1 ( 0.00%)      return discounted_price;
+        6 ( 0.00%)  }
+        .           
+        8 ( 0.00%)  int main() {
+        .               OptionData data;
+        2 ( 0.00%)      data.initial_price = 100.0;
+        2 ( 0.00%)      data.strike_price = 105.0;
+        2 ( 0.00%)      data.risk_free_rate = 0.05;
+        2 ( 0.00%)      data.volatility = 0.20;
+        2 ( 0.00%)      data.time_to_maturity = 1.0;
+        .               // data.num_simulations = 10000; // Keep it low for a quick example run
+        1 ( 0.00%)      data.num_simulations = 1000; // Keep it low for a quick example run
+        1 ( 0.00%)      data.num_steps = 252; // Number of trading days in a year
+        .           
+        2 ( 0.00%)      auto start = std::chrono::high_resolution_clock::now();
+      900 ( 0.00%)  => ???:0x000000000010a230 (1x)
+        5 ( 0.00%)      double price = run_monte_carlo(data);
+17,670,016,450 (99.99%)  => /home/dkondratenko/Documents/uw/Femi/github/cmake_tutorial/cmake-examples/12-valgrind-perf-optimization/src/naive.cpp:run_monte_carlo(OptionData const&) (1x)
+        2 ( 0.00%)      auto end = std::chrono::high_resolution_clock::now();
+       31 ( 0.00%)  => ???:0x000000000010a230 (1x)
+       11 ( 0.00%)      std::chrono::duration<double, std::milli> duration = end - start;
+      109 ( 0.00%)  => /usr/include/c++/13/bits/chrono.h:std::common_type<std::chrono::duration<long, std::ratio<1l, 1000000000l> >, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >::type std::chrono::operator-<std::chrono::_V2::system_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> >, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >(std::chrono::time_point<std::chrono::_V2::system_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> > > const&, std::chrono::time_point<std::chrono::_V2::system_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> > > const&) (1x)
+       90 ( 0.00%)  => /usr/include/c++/13/bits/chrono.h:std::chrono::duration<double, std::ratio<1l, 1000l> >::duration<long, std::ratio<1l, 1000000000l>, void>(std::chrono::duration<long, std::ratio<1l, 1000000000l> > const&) (1x)
+        .           
+        9 ( 0.00%)      std::cout << "Naive Implementation" << std::endl;
+    5,760 ( 0.00%)  => ???:0x000000000010a340 (1x)
+    5,113 ( 0.00%)  => ???:0x000000000010a310 (1x)
+        9 ( 0.00%)      std::cout << "--------------------" << std::endl;
+      434 ( 0.00%)  => ???:0x000000000010a340 (1x)
+      367 ( 0.00%)  => ???:0x000000000010a310 (1x)
+       14 ( 0.00%)      std::cout << "Calculated Option Price: " << price << std::endl;
+    6,577 ( 0.00%)  => ???:0x000000000010a400 (1x)
+      434 ( 0.00%)  => ???:0x000000000010a340 (1x)
+      392 ( 0.00%)  => ???:0x000000000010a310 (1x)
+       22 ( 0.00%)      std::cout << "Execution Time: " << duration.count() << " ms" << std::endl;
+    2,996 ( 0.00%)  => ???:0x000000000010a400 (1x)
+      434 ( 0.00%)  => ???:0x000000000010a340 (1x)
+      636 ( 0.00%)  => ???:0x000000000010a310 (2x)
+        8 ( 0.00%)  => /usr/include/c++/13/bits/chrono.h:std::chrono::duration<double, std::ratio<1l, 1000l> >::count() const (1x)
+        .           
+        1 ( 0.00%)      return 0;
+        6 ( 0.00%)  }
+--------------------------------------------------------------------------------
+-- Auto-annotated source: /usr/include/c++/13/bits/random.tcc
+--------------------------------------------------------------------------------
+Ir                   
+
+-- line 318 ----------------------------------------
+          .           #endif
+          .           
+          .             template<typename _UIntType,
+          .           	   size_t __w, size_t __n, size_t __m, size_t __r,
+          .           	   _UIntType __a, size_t __u, _UIntType __d, size_t __s,
+          .           	   _UIntType __b, size_t __t, _UIntType __c, size_t __l,
+          .           	   _UIntType __f>
+          .               void
+  1,512,000 ( 0.01%)      mersenne_twister_engine<_UIntType, __w, __n, __m, __r, __a, __u, __d,
+          .           			    __s, __b, __t, __c, __l, __f>::
+          .               seed(result_type __sd)
+          .               {
+    504,000 ( 0.00%)        _M_x[0] = __detail::__mod<_UIntType,
+    756,000 ( 0.00%)  	__detail::_Shift<_UIntType, __w>::__value>(__sd);
+  5,544,000 ( 0.03%)  => /usr/include/c++/13/bits/random.h:unsigned long std::__detail::__mod<unsigned long, 4294967296ul, 1ul, 0ul>(unsigned long) (252,000x)
+          .           
+471,996,000 ( 2.67%)        for (size_t __i = 1; __i < state_size; ++__i)
+          .           	{
+784,980,000 ( 4.44%)  	  _UIntType __x = _M_x[__i - 1];
+470,988,000 ( 2.67%)  	  __x ^= __x >> (__w - 2);
+470,988,000 ( 2.67%)  	  __x *= __f;
+627,984,000 ( 3.55%)  	  __x += __detail::__mod<_UIntType, __n>(__i);
+4,866,876,000 (27.54%)  => /usr/include/c++/13/bits/random.h:unsigned long std::__detail::__mod<unsigned long, 624ul, 1ul, 0ul>(unsigned long) (156,996,000x)
+470,988,000 ( 2.67%)  	  _M_x[__i] = __detail::__mod<_UIntType,
+470,988,000 ( 2.67%)  	    __detail::_Shift<_UIntType, __w>::__value>(__x);
+3,453,912,000 (19.54%)  => /usr/include/c++/13/bits/random.h:unsigned long std::__detail::__mod<unsigned long, 4294967296ul, 1ul, 0ul>(unsigned long) (156,996,000x)
+          .           	}
+    504,000 ( 0.00%)        _M_p = state_size;
+    756,000 ( 0.00%)      }
+          .           
+          .             template<typename _UIntType,
+          .           	   size_t __w, size_t __n, size_t __m, size_t __r,
+          .           	   _UIntType __a, size_t __u, _UIntType __d, size_t __s,
+          .           	   _UIntType __b, size_t __t, _UIntType __c, size_t __l,
+          .           	   _UIntType __f>
+          .               template<typename _Sseq>
+          .                 auto
+-- line 351 ----------------------------------------
+-- line 389 ----------------------------------------
+          .                 }
+          .           
+          .             template<typename _UIntType, size_t __w,
+          .           	   size_t __n, size_t __m, size_t __r,
+          .           	   _UIntType __a, size_t __u, _UIntType __d, size_t __s,
+          .           	   _UIntType __b, size_t __t, _UIntType __c, size_t __l,
+          .           	   _UIntType __f>
+          .               void
+  1,008,000 ( 0.01%)      mersenne_twister_engine<_UIntType, __w, __n, __m, __r, __a, __u, __d,
+          .           			    __s, __b, __t, __c, __l, __f>::
+          .               _M_gen_rand(void)
+          .               {
+    252,000 ( 0.00%)        const _UIntType __upper_mask = (~_UIntType()) << __r;
+    252,000 ( 0.00%)        const _UIntType __lower_mask = ~__upper_mask;
+          .           
+172,620,000 ( 0.98%)        for (size_t __k = 0; __k < (__n - __m); ++__k)
+          .                   {
+400,428,000 ( 2.27%)  	  _UIntType __y = ((_M_x[__k] & __upper_mask)
+286,020,000 ( 1.62%)  			   | (_M_x[__k + 1] & __lower_mask));
+572,040,000 ( 3.24%)  	  _M_x[__k] = (_M_x[__k + __m] ^ (__y >> 1)
+429,031,093 ( 2.43%)  		       ^ ((__y & 0x01) ? __a : 0));
+          .                   }
+          .           
+300,384,000 ( 1.70%)        for (size_t __k = (__n - __m); __k < (__n - 1); ++__k)
+          .           	{
+698,544,000 ( 3.95%)  	  _UIntType __y = ((_M_x[__k] & __upper_mask)
+498,960,000 ( 2.82%)  			   | (_M_x[__k + 1] & __lower_mask));
+997,920,000 ( 5.65%)  	  _M_x[__k] = (_M_x[__k + (__m - __n)] ^ (__y >> 1)
+748,449,497 ( 4.24%)  		       ^ ((__y & 0x01) ? __a : 0));
+          .           	}
+          .           
+  1,512,000 ( 0.01%)        _UIntType __y = ((_M_x[__n - 1] & __upper_mask)
+    756,000 ( 0.00%)  		       | (_M_x[0] & __lower_mask));
+  1,764,000 ( 0.01%)        _M_x[__n - 1] = (_M_x[__m - 1] ^ (__y >> 1)
+  1,637,757 ( 0.01%)  		       ^ ((__y & 0x01) ? __a : 0));
+    504,000 ( 0.00%)        _M_p = 0;
+    756,000 ( 0.00%)      }
+          .           
+          .             template<typename _UIntType, size_t __w,
+          .           	   size_t __n, size_t __m, size_t __r,
+          .           	   _UIntType __a, size_t __u, _UIntType __d, size_t __s,
+          .           	   _UIntType __b, size_t __t, _UIntType __c, size_t __l,
+          .           	   _UIntType __f>
+          .               void
+          .               mersenne_twister_engine<_UIntType, __w, __n, __m, __r, __a, __u, __d,
+-- line 433 ----------------------------------------
+-- line 445 ----------------------------------------
+          .             template<typename _UIntType, size_t __w,
+          .           	   size_t __n, size_t __m, size_t __r,
+          .           	   _UIntType __a, size_t __u, _UIntType __d, size_t __s,
+          .           	   _UIntType __b, size_t __t, _UIntType __c, size_t __l,
+          .           	   _UIntType __f>
+          .               typename
+          .               mersenne_twister_engine<_UIntType, __w, __n, __m, __r, __a, __u, __d,
+          .           			    __s, __b, __t, __c, __l, __f>::result_type
+  6,411,520 ( 0.04%)      mersenne_twister_engine<_UIntType, __w, __n, __m, __r, __a, __u, __d,
+          .           			    __s, __b, __t, __c, __l, __f>::
+          .               operator()()
+          .               {
+          .                 // Reload the vector - cost is O(n) amortized over n calls.
+  5,129,216 ( 0.03%)        if (_M_p >= state_size)
+    756,000 ( 0.00%)  	_M_gen_rand();
+5,112,838,347 (28.93%)  => /usr/include/c++/13/bits/random.tcc:std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>::_M_gen_rand() (252,000x)
+          .           
+          .                 // Calculate o(x(i)).
+ 10,258,432 ( 0.06%)        result_type __z = _M_x[_M_p++];
+  5,129,216 ( 0.03%)        __z ^= (__z >> __u) & __d;
+  5,129,216 ( 0.03%)        __z ^= (__z << __s) & __b;
+  5,129,216 ( 0.03%)        __z ^= (__z << __t) & __c;
+  3,846,912 ( 0.02%)        __z ^= (__z >> __l);
+          .           
+  1,282,304 ( 0.01%)        return __z;
+  2,564,608 ( 0.01%)      }
+          .           
+          .             template<typename _UIntType, size_t __w,
+          .           	   size_t __n, size_t __m, size_t __r,
+          .           	   _UIntType __a, size_t __u, _UIntType __d, size_t __s,
+          .           	   _UIntType __b, size_t __t, _UIntType __c, size_t __l,
+          .           	   _UIntType __f, typename _CharT, typename _Traits>
+          .               std::basic_ostream<_CharT, _Traits>&
+          .               operator<<(std::basic_ostream<_CharT, _Traits>& __os,
+-- line 477 ----------------------------------------
+-- line 1804 ----------------------------------------
+          .              * Polar method due to Marsaglia.
+          .              *
+          .              * Devroye, L. Non-Uniform Random Variates Generation. Springer-Verlag,
+          .              * New York, 1986, Ch. V, Sect. 4.4.
+          .              */
+          .             template<typename _RealType>
+          .               template<typename _UniformRandomNumberGenerator>
+          .                 typename normal_distribution<_RealType>::result_type
+  2,520,000 ( 0.01%)        normal_distribution<_RealType>::
+          .                 operator()(_UniformRandomNumberGenerator& __urng,
+          .           		 const param_type& __param)
+          .                 {
+          .           	result_type __ret;
+          .           	__detail::_Adaptor<_UniformRandomNumberGenerator, result_type>
+  1,260,000 ( 0.01%)  	  __aurng(__urng);
+  2,772,000 ( 0.02%)  => /usr/include/c++/13/bits/random.h:std::__detail::_Adaptor<std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>, double>::_Adaptor(std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>&) (252,000x)
+          .           
+  1,008,000 ( 0.01%)  	if (_M_saved_available)
+          .           	  {
+          .           	    _M_saved_available = false;
+          .           	    __ret = _M_saved;
+          .           	  }
+          .           	else
+          .           	  {
+          .           	    result_type __x, __y, __r2;
+          .           	    do
+          .           	      {
+  2,244,032 ( 0.01%)  		__x = result_type(2.0) * __aurng() - 1.0;
+5,217,781,547 (29.53%)  => /usr/include/c++/13/bits/random.h:std::__detail::_Adaptor<std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>, double>::operator()() (320,576x)
+  2,244,032 ( 0.01%)  		__y = result_type(2.0) * __aurng() - 1.0;
+104,187,200 ( 0.59%)  => /usr/include/c++/13/bits/random.h:std::__detail::_Adaptor<std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>, double>::operator()() (320,576x)
+  2,244,032 ( 0.01%)  		__r2 = __x * __x + __y * __y;
+          .           	      }
+  2,794,304 ( 0.02%)  	    while (__r2 > 1.0 || __r2 == 0.0);
+          .           
+  2,772,000 ( 0.02%)  	    const result_type __mult = std::sqrt(-2 * std::log(__r2) / __r2);
+ 14,064,969 ( 0.08%)  => ???:0x000000000010a2e0 (252,000x)
+  2,520,000 ( 0.01%)  => ???:0x000000000010a2c0 (252,000x)
+  1,008,000 ( 0.01%)  	    _M_saved = __x * __mult;
+    504,000 ( 0.00%)  	    _M_saved_available = true;
+    756,000 ( 0.00%)  	    __ret = __y * __mult;
+          .           	  }
+          .           
+  3,024,000 ( 0.02%)  	__ret = __ret * __param.stddev() + __param.mean();
+  2,016,000 ( 0.01%)  => /usr/include/c++/13/bits/random.h:std::normal_distribution<double>::param_type::stddev() const (252,000x)
+  2,016,000 ( 0.01%)  => /usr/include/c++/13/bits/random.h:std::normal_distribution<double>::param_type::mean() const (252,000x)
+    252,000 ( 0.00%)  	return __ret;
+  1,260,000 ( 0.01%)        }
+          .           
+          .             template<typename _RealType>
+          .               template<typename _ForwardIterator,
+          .           	     typename _UniformRandomNumberGenerator>
+          .                 void
+          .                 normal_distribution<_RealType>::
+          .                 __generate_impl(_ForwardIterator __f, _ForwardIterator __t,
+          .           		      _UniformRandomNumberGenerator& __urng,
+-- line 1852 ----------------------------------------
+-- line 3341 ----------------------------------------
+          .           	  __begin[__kqn] ^= __r4;
+          .           	  __begin[__kn] = __r4;
+          .           	}
+          .               }
+          .           
+          .             template<typename _RealType, size_t __bits,
+          .           	   typename _UniformRandomNumberGenerator>
+          .               _RealType
+  5,770,368 ( 0.03%)      generate_canonical(_UniformRandomNumberGenerator& __urng)
+          .               {
+          .                 static_assert(std::is_floating_point<_RealType>::value,
+          .           		    "template argument must be a floating point type");
+          .           
+    641,152 ( 0.00%)        const size_t __b
+          .           	= std::min(static_cast<size_t>(std::numeric_limits<_RealType>::digits),
+          .                              __bits);
+  1,282,304 ( 0.01%)        const long double __r = static_cast<long double>(__urng.max())
+          .           			    - static_cast<long double>(__urng.min()) + 1.0L;
+ 17,952,256 ( 0.10%)        const size_t __log2r = std::log(__r) / std::log(2.0L);
+ 57,703,680 ( 0.33%)  => /usr/include/c++/13/cmath:std::log(long double) (1,282,304x)
+  5,129,216 ( 0.03%)        const size_t __m = std::max<size_t>(1UL,
+  9,617,280 ( 0.05%)  => /usr/include/c++/13/bits/stl_algobase.h:unsigned long const& std::max<unsigned long>(unsigned long const&, unsigned long const&) (641,152x)
+  3,205,760 ( 0.02%)  					  (__b + __log2r - 1UL) / __log2r);
+          .                 _RealType __ret;
+  1,282,304 ( 0.01%)        _RealType __sum = _RealType(0);
+  1,282,304 ( 0.01%)        _RealType __tmp = _RealType(1);
+  7,052,672 ( 0.04%)        for (size_t __k = __m; __k != 0; --__k)
+          .           	{
+ 21,799,168 ( 0.12%)  	  __sum += _RealType(__urng() - __urng.min()) * __tmp;
+5,158,474,987 (29.19%)  => /usr/include/c++/13/bits/random.tcc:std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>::operator()() (1,282,304x)
+  7,693,824 ( 0.04%)  => /usr/include/c++/13/bits/random.h:std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>::min() (1,282,304x)
+  5,129,216 ( 0.03%)  	  __tmp *= __r;
+          .           	}
+  1,923,456 ( 0.01%)        __ret = __sum / __tmp;
+  4,488,064 ( 0.03%)        if (__builtin_expect(__ret >= _RealType(1), 0))
+          .           	{
+          .           #if _GLIBCXX_USE_C99_MATH_TR1
+          .           	  __ret = std::nextafter(_RealType(1), _RealType(0));
+          .           #else
+          .           	  __ret = _RealType(1)
+          .           	    - std::numeric_limits<_RealType>::epsilon() / _RealType(2);
+          .           #endif
+          .           	}
+    641,152 ( 0.00%)        return __ret;
+  3,846,912 ( 0.02%)      }
+          .           
+          .           _GLIBCXX_END_NAMESPACE_VERSION
+          .           } // namespace
+          .           
+          .           #endif
+
+--------------------------------------------------------------------------------
+The following files chosen for auto-annotation could not be found:
+--------------------------------------------------------------------------------
+  ./math/../sysdeps/ieee754/dbl-64/e_log.c
+  ./math/../sysdeps/x86_64/fpu/e_logl.S
+  ./math/./math/w_logl_compat.c
+
+--------------------------------------------------------------------------------
+Ir                      
+--------------------------------------------------------------------------------
+17,483,451,906 (98.93%)  events annotated
+
