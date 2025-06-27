@@ -19,6 +19,135 @@ High-performance trading systems demand **nanosecond-level latency measurements*
 * May involve system calls or be affected by OS scheduler
 * Not suitable for per-function or per-instruction level measurements
 
+## Chrono types
+
+Of course. Let's break down the clock types available in the C++ `<chrono>` library. Understanding the difference is crucial for writing correct and robust time-dependent code.
+
+In essence, a **clock** is a class that provides access to the current point in time (a `time_point`). The key is that different clocks measure time in different ways and for different purposes.
+
+The C++ standard library defines three primary clocks.
+
+---
+
+### 1. `std::system_clock`
+
+This is the "wall-clock" time. It represents the real-world time that you would see on a clock on the wall.
+
+* **Purpose:** To relate a point in time to the real-world calendar and time of day.
+* **Characteristics:**
+  * **Represents System Time:** It is synchronized with the system's clock.
+  * **NOT Monotonic:** This is its most important and dangerous characteristic. The time from `system_clock` can go backward! This can happen if the user manually changes the system time, or if the system synchronizes with an NTP (Network Time Protocol) server.
+  * **Epoch:** Its epoch (the time point from which it starts counting) is typically the UNIX epoch: 00:00:00 UTC on January 1, 1970.
+  * **Convertible:** It's the only clock that has `to_time_t()` and `from_time_t()` methods, making it easy to convert to and from legacy C-style time structures used for calendar functions.
+
+* **When to Use It:**
+  * Getting the current date and time to display to a user.
+  * Creating timestamps for logging or file creation.
+  * Scheduling an event to happen at a specific calendar time (e.g., run a backup at 2:00 AM).
+
+* **When NOT to Use It:**
+  * **Never use it for measuring time intervals (durations).** If the clock is adjusted backward while you're timing something, you could get a negative duration, leading to bugs or infinite loops.
+
+* **Code Example:**
+
+    ```cpp
+    #include <iostream>
+    #include <chrono>
+    #include <ctime>
+
+    int main() {
+        // Get the current time point from the system_clock
+        std::chrono::system_clock::time_point now = std::chrono::system_clock::now();
+
+        // Convert it to a legacy time_t to print it
+        std::time_t now_c = std::chrono::system_clock::to_time_t(now);
+        std::cout << "Current time: " << std::ctime(&now_c);
+    }
+    ```
+
+---
+
+### 2. `std::steady_clock`
+
+This is the clock you should use for measuring time intervals.
+
+* **Purpose:** To measure durations accurately.
+* **Characteristics:**
+  * **Monotonic:** This is its defining feature. Time from a `steady_clock` will **never go backward**. A later call to `now()` will always return a value greater than or equal to a previous call.
+  * **Not Related to Wall Time:** The value of a `steady_clock::time_point` is not meaningful on its own. It's typically the time since the system booted or some other arbitrary starting point. You can't convert it to a calendar date. Its only purpose is to be subtracted from another `steady_clock::time_point`.
+
+* **When to Use It:**
+  * Timing how long a function takes to execute (benchmarking).
+  * Implementing timeouts.
+  * Controlling animations or physics loops in a game engine.
+  * Anywhere you need to calculate an elapsed time (`end - start`).
+
+* **Code Example:**
+
+    ```cpp
+    #include <iostream>
+    #include <chrono>
+    #include <thread> // For std::this_thread::sleep_for
+
+    void long_running_task() {
+        std::this_thread::sleep_for(std::chrono::milliseconds(150));
+    }
+
+    int main() {
+        // Get the start time
+        auto start = std::chrono::steady_clock::now();
+
+        long_running_task();
+
+        // Get the end time
+        auto end = std::chrono::steady_clock::now();
+
+        // Calculate the duration
+        std::chrono::duration<double, std::milli> elapsed_ms = end - start;
+
+        std::cout << "Task took " << elapsed_ms.count() << " ms.\n";
+    }
+    ```
+
+---
+
+### 3. `std::high_resolution_clock`
+
+This clock is intended to be the one with the smallest possible tick period (the highest precision).
+
+* **Purpose:** To provide the most precise time measurement available on the system.
+* **Characteristics:**
+  * **It's often just an alias!** On most modern C++ standard library implementations, `std::high_resolution_clock` is simply a `typedef` (alias) for `std::steady_clock`. The standard does not require it to be monotonic, but it usually is.
+  * **Avoid if possible:** Because its behavior isn't strictly guaranteed and it's usually just `steady_clock` anyway, it is considered best practice to **prefer `std::steady_clock`** directly when you need to measure intervals. This makes your intent clearer.
+
+* **When to Use It:**
+  * In practice, it's better to use `std::steady_clock` for measuring time and `std::system_clock` for calendar time. There is rarely a good reason to use `high_resolution_clock` directly in modern code.
+
+---
+
+### Summary Table
+
+| Clock | Monotonic? | Represents | Primary Use Case |
+| :--- | :---: | :--- | :--- |
+| `std::system_clock` | **No** | Wall-clock / Calendar time | Timestamps, scheduling |
+| `std::steady_clock` | **Yes** | An arbitrary, steady time flow | Measuring intervals, timeouts, benchmarking |
+| `std::high_resolution_clock` | Usually | (Often an alias for `steady_clock`) | (Legacy) High-precision measurements |
+
+### The Golden Rule
+
+* If you need to know **"how long"** something took, use **`std::steady_clock`**.
+* If you need to know **"what time"** something happened, use **`std::system_clock`**.
+
+### C++20 and Beyond
+
+C++20 introduced new, more specialized clocks for handling time zones and different time standards with greater accuracy, including:
+
+* `std::chrono::utc_clock`: Represents Coordinated Universal Time (UTC). It correctly handles leap seconds, unlike `system_clock`.
+* `std::chrono::tai_clock`: Represents International Atomic Time (TAI), which is not subject to leap seconds.
+* `std::chrono::gps_clock`: Represents the time standard used by the Global Positioning System (GPS).
+
+For most everyday application development, `system_clock` and `steady_clock` remain the essential workhorses. The new clocks are for applications that require a very high degree of calendrical or scientific accuracy.
+
 ---
 
 ## `RDTSC`: Low-Level, Cycle-Accurate Timing
@@ -108,9 +237,7 @@ This is a GCC inline assembly instruction used to **serialize** instruction exec
 | `ECX`    | Same                                                           |
 | `EDX`    | Same                                                           |
 
-
 ## How to convert CPU cycles to time
-
 
 ## 1\. What is a Clock Cycle in Simple Terms?
 

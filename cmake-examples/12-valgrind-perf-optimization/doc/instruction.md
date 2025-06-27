@@ -53,6 +53,16 @@ callgrind_annotate callgrind.out.<pid> src/naive.cpp
 callgrind_annotate callgrind.out.2753851 ../src/naive.cpp
 ```
 
+### Store results into the log file
+
+```bash
+callgrind_annotate callgrind.out.2825591 ../src/naive.cpp > perf.log.txt
+```
+
+### Redirect output to a file in Linux
+
+**>** perf.log.txt
+
 If you are executing from the build directory, you should use relative path to the source file. For example, if the source file is located in the `src` directory, you should use:
 ../src/naive.cpp
 

@@ -6,18 +6,19 @@
 
 ### Low priority
 
-- [ ] Windows build .exe?
+- [] Windows build .exe?
 
 ## Next session
 
-### Wed July 2 2025
+### Wed July 9 2025
 
-- [] 1
+- [] Static code analysis
+- [] Rearrange documents/roadmap/C++ Training Plan 6-20-2025.txt
 
 ### Fri June 27 2025
 
-- [] valgrind
-- [] chrono, rdtsc
+- [x] valgrind
+- [x] chrono, rdtsc
 - [] Static code analysis
 
 ### Wed June 25 2025
