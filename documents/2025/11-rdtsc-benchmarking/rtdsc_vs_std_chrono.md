@@ -42,11 +42,14 @@ This is the "wall-clock" time. It represents the real-world time that you would 
 
 * **When to Use It:**
   * Getting the current date and time to display to a user.
-  * Creating timestamps for logging or file creation.
+  * Creating timestamps for logging or file creation - plot performance trends over time, compare benchmarks done on different systems or OSes, or sync results with CI/CD pipelines.
   * Scheduling an event to happen at a specific calendar time (e.g., run a backup at 2:00 AM).
+  * Also use when ultra-precise CPU cycle-level profiling is not needed. All that is needed is how long code runs in real-world time - Works across threads, processes, or even machines—helpful in distributed benchmarking.
+  * Baseline alignment - When running multiple algorithms, especially in a long test suite, you can timestamp each segment to align them in time. This helps answer questions like, “Did performance degrade after an update?” or “Was the slowdown tied to system load at a particular moment?”
 
 * **When NOT to Use It:**
-  * **Never use it for measuring time intervals (durations).** If the clock is adjusted backward while you're timing something, you could get a negative duration, leading to bugs or infinite loops.
+  * **Never use it for measuring time intervals (durations).** If the clock is adjusted backward while you're timing something, you could get a negative duration, leading to bugs or infinite loops. When clock adjustments are possible, use std::chrono::steady_clock (which is monotonic and immune to clock changes)
+  * **Not for performance-critical measurements - resolution is at seconds/milliseconds.** For those, use std::chrono::high_resolution_clock
 
 * **Code Example:**
 
@@ -65,6 +68,29 @@ This is the "wall-clock" time. It represents the real-world time that you would 
     }
     ```
 
+    ```cpp
+    #include <iostream>
+    #include <chrono>
+    #include <ctime>
+
+    int main() {
+        auto start = std::chrono::system_clock::now();
+
+        // Code to benchmark
+        for (volatile int i = 0; i < 1e7; ++i);
+
+        auto end = std::chrono::system_clock::now();
+        std::chrono::duration<double> elapsed_seconds = end - start;
+
+        std::time_t start_time = std::chrono::system_clock::to_time_t(start);
+        std::cout << "Started at: " << std::ctime(&start_time)
+                  << "Elapsed time: " << elapsed_seconds.count() << "s\n";
+    }
+    ```
+
+To convert Unix Time Stamps use https://www.unixtimestamp.com/ Epoch and unix timestamp converter for developers. Date and time function syntax reference for various programming languages.
+What is the unix time stamp?
+The unix time stamp is a way to track time as a running total of seconds. This count starts at the Unix Epoch on January 1st, 1970 at UTC. Therefore, the unix time stamp is merely the number of seconds between a particular date and the Unix Epoch.
 ---
 
 ### 2. `std::steady_clock`
