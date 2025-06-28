@@ -12,12 +12,15 @@ protected:
     // This method is called before each test in this fixture
     void SetUp() override {
         // Optional setup
-        
+        //If there is a need to call the base class SetUp then call as
+        //::testing::Test::Setup()
     }
 
     // This method is called after each test in this fixture
     void TearDown() override {
         // Optional teardown
+        //If there is a need to call the base class TearDown then call as
+        //::testing::Test::TearDown()
     }
 
     // SetUpTestSuite() / TearDownTestSuite()
@@ -25,6 +28,7 @@ protected:
 
 // Test case for the 'add' method
 TEST_F(CalculatorTest, AddsTwoNumbers) {
+    // 3A pattern - Arrange, Act, Assert
     // Arrange (setup test data)
     // The 'calc' object is already set up by the fixture.
 
@@ -38,6 +42,7 @@ TEST_F(CalculatorTest, AddsTwoNumbers) {
 
 // Test case for the 'subtract' method
 TEST_F(CalculatorTest, SubtractsTwoNumbers) {
+    // 3A pattern - Arrange, Act, Assert
     // Arrange
     // The 'calc' object is already set up by the fixture.
 
@@ -50,6 +55,7 @@ TEST_F(CalculatorTest, SubtractsTwoNumbers) {
 
 // Another test for addition, demonstrating different inputs
 TEST_F(CalculatorTest, AddsZero) {
+    // 3A pattern - Arrange, Act, Assert
     ASSERT_EQ(5, calc.add(5, 0));
     ASSERT_EQ(0, calc.add(0, 0));
 }
@@ -60,5 +66,14 @@ TEST_F(CalculatorTest, AddsZero) {
 // If you are building multiple test executables, you might need a main in each.
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv); // Initializes the Google Test framework
-    return RUN_ALL_TESTS();                // Runs all defined tests
+
+    //Can call a SetUpMyTests() method here
+    const int rv = RUN_ALL_TESTS();  // Runs all defined tests
+    //Can call a TearDownMyTests() method here
+    return rv;
 }
+
+// For global setup and teardown that runs once for all tests, you can use a test environment. This involves: 
+// Creating a class that inherits from ::testing::Environment.
+// Overriding the SetUp() and TearDown() methods in this class to include your global setup and teardown code.
+// Registering an instance of this environment class with Google Test by calling ::testing::AddGlobalTestEnvironment() before RUN_ALL_TESTS() is invoked in your main() function. 

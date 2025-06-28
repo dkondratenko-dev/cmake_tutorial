@@ -28,7 +28,6 @@ add_subdirectory(src/mylib)
 # Add your test subdirectory
 add_subdirectory(tests)
 
-
 # Add a custom target to run all tests
 # This target depends on all test executables to ensure they are built before tests are run.
 # The `ALL` keyword would make it part of the default build, but usually you want to
