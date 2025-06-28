@@ -139,6 +139,7 @@ The **object is destroyed** when the strong count drops to zero. The **control b
 
 ![Alt text](weakptr.width-1200.png)
 
+### The elements of a shared_ptr are two raw pointers that point to the Resource (T*) and to the Control Block (control_block*). Usually this shared_ptr size is 2*sizeof(int) or 16 bytes on a 64-bit system, but this can be different as the c++ standard does not specify the layout (composition) of the shared_ptr.
 ---
 
 ## 4. The Circular Dependency Problem
