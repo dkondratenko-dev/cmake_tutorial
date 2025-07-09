@@ -1,4 +1,4 @@
-Checks: '-*,bugprone-*,performance-*,readability-*,modernize-*'
+Checks: '-*,bugprone-*,performance-*,readability-*,modernize-*,cppcoreguidelines-pro-bounds-constant-array-index'
 WarningsAsErrors: true
 HeaderFilterRegex: '.*'
 FormatStyle: file
