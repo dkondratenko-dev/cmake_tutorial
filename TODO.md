@@ -10,10 +10,16 @@
 
 ## Next session
 
+### Fri July 11 2025
+
+- [ ] Memory and architecture
+	- [ ] VTable
+	- [ ] vbase offset table
+
 ### Wed July 9 2025
 
-- [] Static code analysis
-- [] Rearrange documents/roadmap/C++ Training Plan 6-20-2025.txt
+- [x] Static code analysis
+- [x] Rearrange documents/roadmap/C++ Training Plan 6-20-2025.txt
 
 ### Fri June 27 2025
 

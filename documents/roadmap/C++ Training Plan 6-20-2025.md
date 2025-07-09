@@ -26,11 +26,13 @@ VSCode(June/July)
 	- [ ] Analyzing memory problems (2 weeks)
 		- [x] AddressSanitizer? - compile with -fsanitize=address
 		- [ ] GDB? - run program with gdb ./my_program and use info, memory, or watch commands to monitor memory
-	- [ ] Static code analysis
+	- [x] Static code analysis
 - [ ] Memory and architecture
 	- [ ] VTable
 	- [ ] vbase offset table
 	- [ ] Manual memory management (object lifetime, custom allocator)
+        - [ ] Sizeof class with virtual functions. Why? sizeof(A) give 1byte for struct A {}
+        - [ ] Structural alignment
 	- [ ] Cache locality, branch prediction, data alignment/structural alignment
 	- [ ] Play around with cache friendly data structures
 	- [ ] Inline assembly (basic level)
@@ -77,18 +79,6 @@ Minor issues (1 day)
 
 - [ ] How to fix VSCode SonarCube issue?
 - [ ] Why is ECS pattern good for games but not good for financial market analysis? - with C++ examples
-
-C++ Interview topics
-
-- [ ] VTable, vbaseoffset table
-- [ ] Sizeof class with virtual functions
-- [ ] Why does a class with two virtual functions have a size of 4 bytes?
-- [ ] Manual memory management
-	- [ ] object lifetimes
-	- [ ] custom allocators
-- [ ] Cache locality
-- [ ] Structural alignment
-	- [ ] Why? sizeof(A) give 1byte for struct A {}
 
 Leetcode (The rest of September)
  - [ ] I will learn this on my own, but I need you to play the role of an interviewer and ask random questions to test my skills
