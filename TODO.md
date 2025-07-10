@@ -15,6 +15,8 @@
 - [ ] Memory and architecture
 	- [ ] VTable
 	- [ ] vbase offset table
+	- [ ] Generating report from cppcheck
+	- [ ] Plugins: @popular google search
 
 ### Wed July 9 2025
 
