@@ -383,6 +383,18 @@ In this classic **diamond**, `Bottom` inherits `Base` **virtually** through both
 Let’s add code to examine casting behavior:
 
 ```cpp
+
+// cout overloaded operator "<<" for Left*
+// std::ostream& operator<<(std::ostream& os, const Left* leftPtr) {
+//     if (leftPtr == nullptr) {
+//         os << "nullptr (Left*)"; // Handle null pointers gracefully
+//     } else {
+//         os << "Left Object [ID: " << leftPtr->getId()
+//            << ", Name: \"" << leftPtr->getName() << "\"]";
+//     }
+//     return os;
+// }
+
 int main() {
     Bottom b;
     Base* basePtr = &b; // Upcast to virtual base
@@ -391,8 +403,34 @@ int main() {
     Left* lptr = &b;
     Right* rptr = &b;
 
-    cout << "lptr:  " << static_cast<void*>(lptr) << '\n';
-    cout << "rptr:  " << static_cast<void*>(rptr) << '\n';
+    /* unsafe, you have to be 100% sure that lptr can be casted to Right
+       Otherwise you will get application crash - undefined behavior
+    */
+    Right* l2r = static_cast<Right*>(lptr); 
+    /* dynamic_cast - is a safe cast for runtime. When you are not sure what is under lptr, you should use dynamic_cast.
+    used in runtime for safe casting. if the cast fails it will return nullptr
+    */ 
+    Right* l2r = dynamic_cast<Right*>(lptr);
+    if(nullptr == l2r)   {
+      cout << "Failed to cast to Right from the Left\n";
+    }  else   {
+      cout << "Left casted to Right\n";
+      l2r->who();
+    }
+
+
+    Base* basePtr2 = new Left();
+
+    auto p = static_cast<Bottom*>(basePtr2)
+    p->who();
+
+    void* p = new Left();
+
+     std::cout << "Type of Left: " << typeid(Left).name() << std::endl;
+
+    cout << "lptr:  " << lptr << '\n'; // To print the memory address. If the "cout operator << " will be overloaded for Left*, it will use it instead if printing the address
+    cout << "lptr:  " << (void*)lptr << '\n'; // C-style cast to void* for printing
+    cout << "rptr:  " << static_cast<void*>(rptr) << '\n'; // static_cast<void*> is for guaranteed printing of the memory address
     cout << "base:  " << static_cast<void*>(basePtr) << '\n';
 
     Base* via_left = lptr;

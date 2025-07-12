@@ -13,10 +13,10 @@
 ### Fri July 11 2025
 
 - [ ] Memory and architecture
-	- [ ] VTable
-	- [ ] vbase offset table
-	- [ ] Generating report from cppcheck
-	- [ ] Plugins: @popular google search
+	- [x] VTable
+	- [x] vbase offset table
+	- [x] Generating report from cppcheck
+	- [x] Plugins: @popular google search
 
 ### Wed July 9 2025
 

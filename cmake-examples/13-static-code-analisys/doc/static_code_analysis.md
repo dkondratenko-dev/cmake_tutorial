@@ -62,6 +62,12 @@ From your `cmake-examples/13-static-code-analisys` directory:
 cppcheck --enable=all --inconclusive --std=c++17 -Iinclude src include --xml-version=2 2> cppcheck_report.xml
 ```
 
+#### From inside the build folder
+
+```bash
+cppcheck --enable=all --inconclusive --std=c++17 -Iinclude ../src ../include --xml-version=2 2> cppcheck_report.xml
+```
+
 ### Generate HTML
 
 (First, find your `cppcheck-htmlreport` script. Let's assume it's in `/usr/share/cppcheck/htmlreport/`)
