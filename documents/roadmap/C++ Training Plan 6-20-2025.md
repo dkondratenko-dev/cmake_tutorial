@@ -28,12 +28,12 @@ VSCode(June/July)
 		- [ ] GDB? - run program with gdb ./my_program and use info, memory, or watch commands to monitor memory
 	- [x] Static code analysis
 - [ ] Memory and architecture
-	- [ ] VTable
-	- [ ] vbase offset table
-	- [ ] Manual memory management (object lifetime, custom allocator)
-        - [ ] Sizeof class with virtual functions. Why? sizeof(A) give 1byte for struct A {}
-        - [ ] Structural alignment
-	- [ ] Cache locality, branch prediction, data alignment/structural alignment
+	- [x] VTable
+	- [x] vbase offset table
+	- [x] Manual memory management (object lifetime, custom allocator)
+        - [x] Sizeof class with virtual functions. Why? sizeof(A) give 1byte for struct A {}
+        - [x] Structural alignment
+	- [x] Cache locality, branch prediction
 	- [ ] Play around with cache friendly data structures
 	- [ ] Inline assembly (basic level)
 	- [ ] Memory ordering
