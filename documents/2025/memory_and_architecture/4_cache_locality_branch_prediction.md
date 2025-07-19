@@ -60,7 +60,10 @@ int main() {
         }
     }
 
-    long long sum = 0;
+    long long sum = 0;  // long long is guaranteed to be at least 64 bits (usually 8 bytes).
+                        // long is at least 32 bits, but its exact size depends on the system:
+                        // On most 64-bit Linux systems, long is 64 bits (same as long long).
+                        // On Windows 32-bit systems, long can be 32 bits, while long long is always 64 bits.
 
     // --- Scenario 1: Good Spatial Locality (Row-Major Access) ---
     // C++ stores std::vector<std::vector<int>> in row-major order.

@@ -415,8 +415,8 @@ public:
     }
     
     // Prevent copying for simplicity
-    FileHandler(const FileHandler&) = delete;
-    FileHandler& operator=(const FileHandler&) = delete;
+    FileHandler(const FileHandler&) = delete;//Copy constructor is deleted and can no longer be used. Done to prevent accidental copying or assignment, especially for classes that manage resources (like files, sockets, or memory) where copying could cause resource leaks or double-free errors. If you try to copy or assign such an object, the compiler will generate an error.
+    FileHandler& operator=(const FileHandler&) = delete;//Copy assignment operator is deleted...
 };
 
 void raii_example() {
@@ -541,7 +541,7 @@ bool operator!=(const TrackingAllocator<T>&, const TrackingAllocator<U>&) {
 }
 
 void custom_allocator_example() {
-    std::vector<int, TrackingAllocator<int>> vec;
+    std::vector<int, TrackingAllocator<int>> vec;//Vector declaration can accept an allocator!
     
     vec.push_back(1);
     vec.push_back(2);
