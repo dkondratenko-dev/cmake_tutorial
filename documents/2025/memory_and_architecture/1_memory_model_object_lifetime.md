@@ -610,7 +610,7 @@ Here is a list of common custom memory allocators with a brief description of th
 * **Memory Pool (or Object Pool)**
     * **Purpose:** Designed for frequent allocation and deallocation of many objects of the **same fixed size**. It pre-allocates a large block of memory and divides it into fixed-size slots, offering very fast allocation/deallocation and reducing fragmentation for that specific object size.
 
-* **Memory Arena Allocator (or Linear Allocator, Bump Allocator)**
+* **Memory Arena Allocator (or Linear Allocator, Bump Allocator) Popular in UHFT code**
     * **Purpose:** Provides extremely fast memory allocation by simply incrementing a pointer within a pre-allocated large block (the arena). It's ideal for objects that have a **similar lifetime** and can be deallocated all at once (by resetting the arena pointer) rather than individually.
 
 * **Stack Allocator**

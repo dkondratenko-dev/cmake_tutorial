@@ -9,6 +9,18 @@ High-level overview.
 Spotting circular dependencies.
 ✅ 3. Doxygen + Graphviz
 Best for comprehensive documentation + visualizations.
+Doxygen is a widely used tool for generating documentation from annotated C++ source code. You can add special comment blocks (using /// or /** */) to provide structured documentation. Example: 
+
+/**
+ * Calculates the sum of two integers.
+ * @param a First integer
+ * @param b Second integer
+ * @return Sum of a and b
+ */
+int add(int a, int b) {
+    return a + b;
+}
+
 When used with Graphviz, Doxygen can generate include dependency graphs:
 For files (#include)
 For classes (inheritance and usage)

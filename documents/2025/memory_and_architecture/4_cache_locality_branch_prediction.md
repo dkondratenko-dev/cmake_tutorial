@@ -31,7 +31,7 @@ The effectiveness of caches relies heavily on the **principle of locality**, whi
 
 1.  **Temporal Locality (Temporal means "time"):**
 
-      * **Concept:** If a piece of data or an instruction is accessed, it is likely to be accessed again **soon** in the near future.
+      * **Concept:** If a piece of data or an instruction is accessed, it is likely to be accessed again **soon** in the near future. This is the basis for cache warming - see cache warming.docx
       * **Example:** Think of a loop variable (`i`) or a frequently used function. Once loaded into the cache, it stays there for a while, allowing subsequent accesses to be fast cache hits.
 
 2.  **Spatial Locality (Spatial means "space"):**
