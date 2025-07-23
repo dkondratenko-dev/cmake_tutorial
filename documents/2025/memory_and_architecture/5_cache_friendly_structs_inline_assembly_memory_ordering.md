@@ -1,7 +1,3 @@
-Of course. As an experienced Markdown editor, I will correct the structural and syntactical issues in your document, paying close attention to the chapter and section indexing. I will not alter the textual content.
-
-Here is the corrected version of your document:
-
 # Advanced Performance Topics in C++
 
 This lecture covers three important performance-oriented topics:
@@ -136,7 +132,7 @@ unsigned long long read_tsc() {
 
 ### 2.5 When to Avoid Inline Assembly
 
-* Modern compilers and intrinsics often produce better code.
+* Modern compilers (after 2000's) and intrinsics often produce better code. -O0 up to -O3
 * Inline assembly is not portable.
 * Use only when absolutely necessary.
 

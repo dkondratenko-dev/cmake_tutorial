@@ -34,9 +34,9 @@ VSCode(June/July)
         - [x] Sizeof class with virtual functions. Why? sizeof(A) give 1byte for struct A {}
         - [x] Structural alignment
 	- [x] Cache locality, branch prediction
-	- [ ] Play around with cache friendly data structures
-	- [ ] Inline assembly (basic level)
-	- [ ] Memory ordering
+	- [x] Play around with cache friendly data structures
+	- [x] Inline assembly (basic level)
+	- [x] Memory ordering
 - [ ] Systems and network Programming
 	- [ ] Wireshark basics
 	- [ ] TCP/UDP, sockets
