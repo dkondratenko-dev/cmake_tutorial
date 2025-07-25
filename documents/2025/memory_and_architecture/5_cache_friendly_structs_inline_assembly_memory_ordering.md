@@ -73,16 +73,16 @@ Therefore, while the exact numbers can vary, the relative speed differences rema
 
 ### 1.5 Example: Improving a Linked List
 
-```cpp
-// Slow (cache unfriendly)
-struct Node {
-    int value;
-    Node* next;
-};
+    ```cpp
+    // Slow (cache unfriendly)
+    struct Node {
+        int value;
+        Node* next;
+    };
 
-// Better: store in contiguous memory
-std::vector<int> values;
-```
+    // Better: store in contiguous memory
+    std::vector<int> values;
+    ```
 
 ### 1.6 Exercises
 
@@ -103,8 +103,8 @@ Inline assembly allows embedding assembly instructions directly in C++ code. It 
 ### 2.2 Syntax (GCC/Clang)
 
 ```cpp
-int x = 5, y;
-asm("mov %1, %0" : "=r"(y) : "r"(x));
+    int x = 5, y;
+    asm("mov %1, %0" : "=r"(y) : "r"(x));
 ```
 
 * `%0`, `%1` refer to output/input operands.
@@ -114,20 +114,20 @@ asm("mov %1, %0" : "=r"(y) : "r"(x));
 ### 2.3 Syntax (MSVC)
 
 ```cpp
-__asm {
-    mov eax, 5
-    add eax, 2
-}
+    __asm {
+        mov eax, 5
+        add eax, 2
+    }
 ```
 
 ### 2.4 Example: Reading CPU Timestamp Counter
 
 ```cpp
-unsigned long long read_tsc() {
-    unsigned int lo, hi;
-    asm volatile ("rdtsc" : "=a"(lo), "=d"(hi));
-    return ((unsigned long long)hi << 32) | lo;
-}
+    unsigned long long read_tsc() {
+        unsigned int lo, hi;
+        asm volatile ("rdtsc" : "=a"(lo), "=d"(hi));
+        return ((unsigned long long)hi << 32) | lo;
+    }
 ```
 
 ### 2.5 When to Avoid Inline Assembly
@@ -179,23 +179,23 @@ An **atomic operation** is an operation that is performed as a single, indivisib
 
 * **Atomic store:**
 
-    ```cpp
+```cpp
     std::atomic<int> x{0};
     x.store(10);  // Atomically sets x to 10
-    ```
+```
 
 * **Atomic load:**
 
-    ```cpp
+```cpp
     int value = x.load();  // Atomically reads x
-    ```
+```
 
 * **Atomic read-modify-write:**
     Operations like `fetch_add`, `fetch_sub`, `exchange`, or `compare_exchange` are atomic.
 
-    ```cpp
+```cpp
     x.fetch_add(1);  // Atomically increments x by 1
-    ```
+```
 
 #### 3.2.3 Why Not Just Use `int`?
 
@@ -205,11 +205,50 @@ On many platforms, `int x = x + 1;` is **not atomic** because it's actually mult
 2. Add 1.
 3. Store the result back to memory.
 
-If two threads run this simultaneously, they can overwrite each other's updates (called a **data race**). With `std::atomic<int>`, the increment is a single atomic machine instruction.
+If two threads run this simultaneously, they can overwrite each other's updates (called a **data race**). So two threads can simultaneously increment a location from 0 to 1 but the result of the two increments will be 1 instead of 2. With `std::atomic<int>`, the increment is a single atomic machine instruction.
 
 #### 3.2.4 Next Step
 
 Would you like me to create a **very simple visual example** (with 2 threads incrementing a variable, one with `int`, one with `std::atomic<int>`) so you can show your student why atomic operations matter?
+
+Random example.
+
+```cpp
+    class Ob{};
+
+    Ob createOb()
+    {
+        Ob o;
+        o.setData();
+        //Which return should we use?
+        return o;
+        return std::move(o);//Not good for returning a result because it can degrade performance
+                            //If Ob has many fields of simpler datatypes the move can translate to much copying
+    }
+
+    int main()
+    {
+        Ob o = createOb();
+    }
+```
+
+Most likely a compiler feature called Return Value Optimization (RVO) is used to optimize the code to:
+
+```cpp
+    class Ob{};
+
+    Ob o;
+    Ob createOb()
+    {//RVO eliminates the need to return the result!
+        Ob o;
+        o.setData();
+    }
+
+    int main()
+    {
+        Ob o = createOb();//
+    }
+```
 
 ### 3.3 Types of Memory Orderings
 
@@ -219,10 +258,21 @@ C++ offers the following memory orderings (used in `atomic` operations):
 
 * **Guarantee:** No synchronization, no ordering. Only guarantees that the operation itself is atomic.
 * **Use case:** When you don't need ordering (e.g., counters that are read only for statistics).
-
+  
 ```cpp
-std::atomic<int> counter = 0;
-counter.fetch_add(1, std::memory_order_relaxed); // Just atomic increment
+    std::atomic<int> counter = 0;
+    counter.fetch_add(1, std::memory_order_relaxed); // Just atomic increment
+
+    //Should this be corrected to:
+
+    //Declare at global level
+    std::atomic<int> counter = 0;
+
+    //Thread A
+    counter.fetch_add(1, std::memory_order_relaxed); 
+
+    //Thread B
+    counter.fetch_add(1, std::memory_order_relaxed); 
 ```
 
 #### 3.3.2 `memory_order_release` (for `store`)
@@ -231,9 +281,16 @@ counter.fetch_add(1, std::memory_order_relaxed); // Just atomic increment
 * **Use case:** Publish data and then set a flag.
 
 ```cpp
-// Thread A
-data = 42; // Some shared data
-ready.store(true, std::memory_order_release); // Make data visible
+    std::atomic<bool> ready {false};
+    int data{0};
+    // Thread A
+    data = 42; // Some shared data
+    ready.store(true, std::memory_order_release); // Make data visible
+
+    // With memory_order_relaxed compiler can rearrange above code so the line for data=42 is executed after the call to ready.store.
+    // Thread B: If another thread has the code below
+    while (!ready.load(std::memory_order_acquire)) {} //Spin-wait
+    int x = data; // Guaranteed to see the correct value of data - we expected to see 42 here but because the compiler rearranged the line for setting data = 42, we will set x to 0
 ```
 
 #### 3.3.3 `memory_order_acquire` (for `load`)
@@ -242,9 +299,9 @@ ready.store(true, std::memory_order_release); // Make data visible
 * **Use case:** Wait for the release flag before reading the data.
 
 ```cpp
-// Thread B
-while (!ready.load(std::memory_order_acquire)) {} // Spin-wait
-int x = data; // Guaranteed to see the correct value of data
+    // Thread B
+    while (!ready.load(std::memory_order_acquire)) {} // Spin-wait
+    int x = data; // Guaranteed to see the correct value of data
 ```
 
 **Release + Acquire** together establish a **happens-before** relationship.
@@ -258,9 +315,10 @@ int x = data; // Guaranteed to see the correct value of data
 
 * **Guarantee:** The strongest ordering; all atomic operations appear in a single global order.
 * **Use case:** When you want simple reasoning at the cost of performance.
-
+* **Default:** This is the default when ordering is not specified in code.
+  
 ```cpp
-ready.store(true, std::memory_order_seq_cst);
+    ready.store(true, std::memory_order_seq_cst);
 ```
 
 ### 3.4 Key Principle: What Is Synchronized?
@@ -268,10 +326,10 @@ ready.store(true, std::memory_order_seq_cst);
 **Important:** `memory_order_release` does not force the *exact order* of operations inside the thread. For example:
 
 ```cpp
-A = 1;
-B = 2;
-C = 3;
-ready.store(true, std::memory_order_release);
+    A = 1;
+    B = 2;
+    C = 3;
+    ready.store(true, std::memory_order_release);
 ```
 
 The compiler/CPU might internally reorder A, B, and C as C, B, A, but it will **always** ensure that all of them are completed **before** `ready` is visible to other threads.
@@ -287,22 +345,22 @@ The compiler/CPU might internally reorder A, B, and C as C, B, A, but it will **
 ### 3.6 Example of Release/Acquire
 
 ```cpp
-std::atomic<bool> ready = false;
-int A, B, C;
+    std::atomic<bool> ready = false;
+    int A, B, C;
 
-void producer() {
-    A = 1;
-    B = 2;
-    C = 3;
-    ready.store(true, std::memory_order_release);
-}
-
-void consumer() {
-    while (!ready.load(std::memory_order_acquire)) {
-        // spin-wait
+    void producer() {
+        A = 1;
+        B = 2;
+        C = 3;
+        ready.store(true, std::memory_order_release);
     }
-    // At this point, we are guaranteed to see A=1, B=2, C=3
-}
+
+    void consumer() {
+        while (!ready.load(std::memory_order_acquire)) {
+            // spin-wait
+        }
+        // At this point, we are guaranteed to see A=1, B=2, C=3
+    }
 ```
 
 ### 3.7 Quick Reference Table
@@ -319,11 +377,11 @@ void consumer() {
 
 You can think of `release` as putting a **barrier behind all previous operations**, while `acquire` puts a **barrier in front of all subsequent operations**.
 
-```
-Thread A:                 Thread B:
-A = 1;                    while (!ready.load(acquire)) {}
-B = 2;                    read A, B safely
-ready.store(release);
+```cpp
+    Thread A:                 Thread B:
+    A = 1;                    while (!ready.load(acquire)) {}
+    B = 2;                    read A, B safely
+    ready.store(release);
 ```
 
 ### 3.9 If You Need Strict Ordering of A, B, C
@@ -331,12 +389,12 @@ ready.store(release);
 `memory_order_release` guarantees that A, B, C will complete **before** `ready`, but not their order among themselves. If the order A->B->C is crucial, you need explicit barriers or use `seq_cst`:
 
 ```cpp
-A = 1;
-std::atomic_thread_fence(std::memory_order_seq_cst);
-B = 2;
-std::atomic_thread_fence(std::memory_order_seq_cst);
-C = 3;
-ready.store(true, std::memory_order_seq_cst);
+    A = 1;
+    std::atomic_thread_fence(std::memory_order_seq_cst);
+    B = 2;
+    std::atomic_thread_fence(std::memory_order_seq_cst);
+    C = 3;
+    ready.store(true, std::memory_order_seq_cst);
 ```
 
 ### 3.10 Key Takeaways
