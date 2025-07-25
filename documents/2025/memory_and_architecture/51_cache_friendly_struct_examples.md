@@ -9,7 +9,12 @@ Each section:
 * **Try This** – experiments to run.
 * **Expected Trend** – what you should observe (roughly; depends on hardware, compiler, build flags).
 
-> **Build tip:** Use `-O3 -march=native -DNDEBUG` for performance experiments. Run multiple times. Pin CPU core if possible.
+> **Build tip:** Use `-O3 -march=native -DNDEBUG` for performance experiments. Run multiple times. Pin CPU core if possible.  
+> -march sets architecture to native  
+> -DNDEBUG means no debug  
+> Pin CPU core - run htop (may  need to install sudo snap install htop or sudo apt install htop. ). At the top of the window will be some color bars showing the CPU cores. Then force the code to run on one core instead of letting OS move it between cores. This is also called setting CPU affinity. Why? When benchmarking or measuring performance (like in C++ memory/cache experiments), running on a single, fixed core reduces variability caused by the OS moving your process between cores (which can disrupt cache usage and timing). Pinning helps you get more consistent and reliable performance measurements.  
+> On Linux, you can pin a program to a core using the taskset command. For example, to run your program on core 0:  
+>taskset -c 0 ./your_program
 
 ---
 
@@ -90,14 +95,15 @@ long long sum_list(Node* head) {
 
 long long sum_vector(const std::vector<int>& v) {
     long long s = 0;
-    for (int x : v) s += x;
+    for (int x : v) s += x;//Even better with (int& x : v) since reference is implemented under the hood as a pointer
+                        //But with a pointer, (int* x : v){ s += *x;} an extra operation is needed to access the pointer.
     do_not_optimize_away(s);
     return s;
 }
 
 int main() {
     constexpr std::size_t N = 50'000'000; // adjust for RAM
-    std::vector<int> v; v.reserve(N); for (std::size_t i=0;i<N;++i) v.push_back((int)i);
+    std::vector<int> v; v.reserve(N); for (std::size_t i=0;i<N;++i) v.push_back((int)i);//std::size_t is an unsigned integer type defined by the standard library, used to represent sizes and counts (like the result of sizeof or for indexing arrays). Its size depends on the platform (usually 8 bytes on 64-bit systems, 4 bytes on 32-bit systems).
     Node* list = make_list(N);
 
     Timer t;
@@ -121,6 +127,16 @@ int main() {
 
 **Expected Trend:** `std::vector` wins strongly when `N` large due to spatial locality and fewer pointer dereferences.
 
+Note: Stroustrup advice - if struct A, and sizeof(A) <= sizeof(int)*3 then it is better to pass A by value instead of by ref. 
+For example see code below. But if there were four int fields then pass by reference. Basically, indirection is an extra weight but for big objects it is better. 
+```cpp
+    struct A
+    {
+        int a;
+        int b;
+        int c;
+    }
+```
 ---
 
 ## 2. Arrray of Struct(AoS) vs Struct of Array(SoA): Updating Particle Positions
@@ -192,7 +208,8 @@ int main(){
 
 ## 3. Struct Padding & Hot/Cold Splitting
 
-**Scenario:** Reduce wasted bytes + pull hot fields together.
+**Scenario:** Reduce wasted bytes or pull hot fields together.  
+For example, split a data structure with "cold" and "warm" fields into a structure with cold and warm parts.
 
 ```cpp
 #include <vector>
@@ -221,9 +238,14 @@ struct EntityCold {
 };
 
 struct Entity {
-    EntityHot hot;
-    EntityCold* cold; // separate allocation, touched rarely
+    EntityHot hot; //Allocated on stack
+    EntityCold* cold; // separate allocation (on heap), touched rarely
 };
+
+//Note how we access the hot and cold parts
+// Entity v
+// v[i].hot
+// v[i]->cold
 
 void update(std::vector<Entity>& ents) {
     for (auto& e : ents) {

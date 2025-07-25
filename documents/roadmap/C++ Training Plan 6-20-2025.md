@@ -38,8 +38,11 @@ VSCode(June/July)
 	- [x] Inline assembly (basic level)
 	- [x] Memory ordering
 - [ ] Systems and network Programming
-	- [ ] Wireshark basics
 	- [ ] TCP/UDP, sockets
+	- [ ] Boost.Interprocess (simple hello world between two processes with shared memory or memory-mapped files)
+	- [ ] Boost.Interprocess (simple hello world with shared object or container and synchronization object like mutex)
+	- [ ] Boost.Asio (simple async hello world between two processes on different pcs)
+	- [ ] Wireshark basics
 	- [ ] Network latency test
 	- [ ] Multicast
 	- [ ] Compile w/flags
