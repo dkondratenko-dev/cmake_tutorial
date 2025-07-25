@@ -123,7 +123,7 @@ int main() {
 
 ---
 
-## 2. AoS vs SoA: Updating Particle Positions
+## 2. Arrray of Struct(AoS) vs Struct of Array(SoA): Updating Particle Positions
 
 **Scenario:** Update only `x` coordinate for many particles. AoS wastes bandwidth fetching unused `y,z,v`.
 
