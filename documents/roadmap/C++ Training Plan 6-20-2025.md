@@ -13,6 +13,8 @@ During training
 
 VSCode(June/July)
 
+Some topics are available in: **documents/2025**
+
 - [ ] CMake (2 weeks)
 	- [x] CMake/Google Testing
 		- [x] Test instrumenting with chrono and rdtsc 
@@ -38,14 +40,14 @@ VSCode(June/July)
 	- [x] Inline assembly (basic level)
 	- [x] Memory ordering
 - [ ] Systems and network Programming
-	- [ ] TCP/UDP, sockets
+	- [x] TCP/UDP, sockets
 	- [ ] Boost.Interprocess (simple hello world between two processes with shared memory or memory-mapped files)
 	- [ ] Boost.Interprocess (simple hello world with shared object or container and synchronization object like mutex)
 	- [ ] Boost.Asio (simple async hello world between two processes on different pcs)
-	- [ ] Wireshark basics
-	- [ ] Network latency test
-	- [ ] Multicast
-	- [ ] Compile w/flags
+	- [x] Wireshark basics
+	- [x] Network latency test
+	- [x] Multicast
+	- [X] Compile w/flags
 	- [ ] Paging
 	- [ ] Cache (OS/CPU)
 	- [ ] Scheduling, CPU affinity
