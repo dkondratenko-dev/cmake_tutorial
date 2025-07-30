@@ -270,6 +270,7 @@ C++ offers the following memory orderings (used in `atomic` operations):
 
     //Thread A
     counter.fetch_add(1, std::memory_order_relaxed); 
+    //Or just counter++;
 
     //Thread B
     counter.fetch_add(1, std::memory_order_relaxed); 

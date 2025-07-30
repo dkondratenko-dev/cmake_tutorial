@@ -272,7 +272,25 @@ int main(){
 
 ## 4. Array-of-Struct-of-Arrays (AoSoA) / Blocked Layout
 
-**Scenario:** Combine SIMD-friendly SoA with cache-friendly blocking.
+**Scenario:** Combine SIMD-friendly SoA with cache-friendly blocking.  
+SIMD stands for Single Instruction, Multiple Data. It is a computer architecture feature that allows a single CPU instruction to process multiple data points in parallel.
+
+In practice, SIMD enables operations like adding, multiplying, or comparing several numbers at once using special CPU instructions and registers (called vector instructions). This is much faster than processing each data point one at a time.
+
+SIMD is commonly used in:
+
+*Multimedia processing (images, audio, video)  
+*Scientific computing  
+*Data-parallel algorithms (e.g., vectorized loops)  
+
+In C++, you can use SIMD via compiler intrinsics, libraries like <immintrin.h>, or high-level abstractions like std::valarray or third-party libraries (e.g., Eigen, Boost.SIMD). Modern CPUs (x86, ARM) support SIMD with instruction sets like SSE, AVX, or NEON.  
+
+SoA is "SIMD-friendly" because:  
+
+*Each array contains only one type of data, making it easy for SIMD instructions to process many elements at once (e.g., load 4 or 8 x values into a SIMD register and operate on them in parallel).
+*Memory accesses are more predictable and aligned, improving performance.  
+
+SIMD-friendly SoA with cache-friendly blocking organizes data to benefit from both SIMD vectorization (via SoA) and from improved cache usage (by processing data in blocks that fit into the CPU cache). This is often called AoSoA (Array of Struct of Arrays) or blocked SoA.
 
 ```cpp
 #include <array>
