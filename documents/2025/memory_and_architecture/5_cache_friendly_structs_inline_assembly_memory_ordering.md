@@ -263,7 +263,7 @@ C++ offers the following memory orderings (used in `atomic` operations):
     std::atomic<int> counter = 0;
     counter.fetch_add(1, std::memory_order_relaxed); // Just atomic increment
 
-    //Should this be corrected to:
+    //In practice the above code will be implemented by declaring the std::atomic at global level and then accessing it from multiple threads like below:
 
     //Declare at global level
     std::atomic<int> counter = 0;
