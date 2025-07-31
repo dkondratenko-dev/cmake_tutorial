@@ -11,8 +11,9 @@ TCP and UDP are the two main protocols for network communication. Sockets are th
 
 - Reliable, connection-oriented protocol
 - Guarantees data delivery and order
-- Like making a phone call - you establish connection first
+- Like making a phone call - you establish connection first, with sockets
 - Examples: Web browsing (HTTP), email, file transfers
+- Data is chunked into multiple packets. Packets have sequence numbers which are used in reordering them after arrival.
 
 **UDP (User Datagram Protocol):**
 
@@ -307,6 +308,12 @@ Kernel bypass techniques allow applications to communicate directly with network
 - When microsecond latency matters
 - When standard networking is too slow
 - When you need maximum network performance
+
+About SR-IOV: In virtualization, single root input/output virtualization (SR-IOV) is a specification that allows the isolation of PCI Express resources for manageability and performance reasons.
+
+A single physical PCI Express bus can be shared in a virtual environment using the SR-IOV specification.[1][2] The SR-IOV offers different virtual functions to different virtual components (e.g. network adapter) on a physical server machine. SR-IOV uses physical and virtual functions to control or configure PCIe devices. Physical functions have the ability to move data in and out of the device while virtual functions are lightweight PCIe functions that support data flowing but also have a restricted set of configuration resources. The virtual or physical functions available to the hypervisor or guest operating system depend on the PCIe device.[3]
+
+The SR-IOV allows different virtual machines (VMs) in a virtual environment to share a single PCI Express hardware interface. In contrast, MR-IOV allows I/O PCI Express to share resources among different VMs on different physical machines.
 
 ---
 
