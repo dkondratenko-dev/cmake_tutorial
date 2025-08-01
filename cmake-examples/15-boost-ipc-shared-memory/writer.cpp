@@ -2,39 +2,53 @@
 #include <boost/interprocess/mapped_region.hpp>
 #include <iostream>
 #include <cstring>
+#include <thread>
+#include <chrono>
 
 using namespace boost::interprocess;
 
 int main() {
     try {
-        // Remove any existing shared memory
+        // Ensure a clean start by removing any leftover segment
         shared_memory_object::remove("SharedMemoryExample");
-        
-        // Create shared memory object
+
+        // Create the shared memory object
         shared_memory_object shm(create_only, "SharedMemoryExample", read_write);
         
         // Set size
         shm.truncate(1024);
-        
-        // Map the whole shared memory in this process
+
+        // Map the memory
         mapped_region region(shm, read_write);
         
         // Get the address of the mapped region
         void* addr = region.get_address();
-        
-        // Write a message
-        const char* message = "Hello from Writer Process!";
+
+        // Write the message
+        const char* message = "Hello from a synchronized Writer!";
         std::strcpy(static_cast<char*>(addr), message);
-        
-        std::cout << "Writer: Message written to shared memory: " << message << std::endl;
-        std::cout << "Writer: Press Enter to cleanup and exit..." << std::endl;
-        std::cin.get();
-        
-        // Cleanup
-        shared_memory_object::remove("SharedMemoryExample");
-        
+        std::cout << "Writer: Message written to shared memory." << std::endl;
+        std::cout << "Writer: Waiting for reader to read and remove the segment..." << std::endl;
+
+        // Keep the program alive, waiting for the reader to remove the segment.
+        // We can check periodically if the shared memory still exists.
+        while (true) {
+            try {
+                // Try to open the shared memory. If it throws an exception,
+                // it means the reader has removed it.
+                shared_memory_object test_shm(open_only, "SharedMemoryExample", read_only);
+                // If we are here, it still exists. Sleep and check again.
+                std::this_thread::sleep_for(std::chrono::milliseconds(100));
+            } catch (const interprocess_exception& e) {
+                // The reader has removed the segment, so we can exit.
+                std::cout << "Writer: Detected that reader has removed the segment. Exiting." << std::endl;
+                break;
+            }
+        }
+
     } catch (const std::exception& e) {
-        std::cerr << "Writer error: " << e.what() << std::endl;
+        std::cerr << "Exception caught! Writer error: " << e.what() << std::endl;
+        // Clean up in case of an error during setup
         shared_memory_object::remove("SharedMemoryExample");
         return 1;
     }

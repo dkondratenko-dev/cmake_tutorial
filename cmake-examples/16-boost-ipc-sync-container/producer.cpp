@@ -1,15 +1,18 @@
 #include <boost/interprocess/shared_memory_object.hpp>
 #include <boost/interprocess/mapped_region.hpp>
 #include <boost/interprocess/sync/interprocess_mutex.hpp>
+#include <boost/interprocess/sync/interprocess_condition.hpp> // Include condition
 #include <boost/interprocess/sync/scoped_lock.hpp>
 #include <iostream>
 #include <thread>
 #include <chrono>
+#include <cstring> // For std::strcpy and sprintf
 
 using namespace boost::interprocess;
 
 struct SharedData {
     interprocess_mutex mutex;
+    interprocess_condition cond_new_item;
     int counter;
     bool finished;
     char message[256];
@@ -39,27 +42,32 @@ int main() {
         
         // Produce 5 items
         for (int i = 1; i <= 5; ++i) {
-            // Lock the mutex
-            scoped_lock<interprocess_mutex> lock(data->mutex);
-            
-            // Update shared data
-            data->counter = i;
-            sprintf(data->message, "Message #%d from Producer", i);
-            
-            std::cout << "Producer: Produced item " << i << std::endl;
-            
-            // Simulate some work
-            lock.unlock();
+            // Simulate some work *before* locking
             std::this_thread::sleep_for(std::chrono::milliseconds(500));
+            {
+                scoped_lock<interprocess_mutex> lock(data->mutex);
+                data->counter = i;
+                sprintf(data->message, "Message #%d from Producer", i);
+                std::cout << "Producer: Produced item " << i << std::endl;
+
+                // *** Notify one waiting consumer that a new item is ready ***
+                lock.unlock();
+                data->cond_new_item.notify_one();
+            }
         }
         
         // Signal completion
         {
             scoped_lock<interprocess_mutex> lock(data->mutex);
             data->finished = true;
-            std::cout << "Producer: Finished producing. Press Enter to cleanup..." << std::endl;
+            std::cout << "Producer: Finished producing. Notifying consumer to exit." << std::endl;
+
+            // *** Notify the consumer a final time so it can see the 'finished' flag ***
+            lock.unlock();
+            data->cond_new_item.notify_one();
         }
-        
+
+        std::cout << "Producer: Press Enter to cleanup..." << std::endl;
         std::cin.get();
         
         // Cleanup
