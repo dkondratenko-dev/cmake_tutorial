@@ -13,15 +13,20 @@ public:
         connect(host, port);
     }
     
+    // Use boost::asio::post to ensure the async_write is initiated from the io_context's thread,
+    // making it thread-safe to call from main().
     void send_message(const std::string& message) {
-        boost::asio::async_write(
-            socket_,
-            boost::asio::buffer(message),
-            [this](boost::system::error_code ec, std::size_t /*length*/) {
-                if (!ec) {
-                    do_read();
-                }
-            });
+        std::cout << "Client: Sending message: " << message << std::endl;
+        boost::asio::post(io_context_, [this, message]() {
+            boost::asio::async_write(
+                socket_,
+                boost::asio::buffer(message),
+                [this](boost::system::error_code ec, std::size_t /*length*/) {
+                    if (ec) {
+                        std::cerr << "Client write error: " << ec.message() << std::endl;
+                    }
+                });
+        });
     }
 
 private:
@@ -35,6 +40,8 @@ private:
             [this](boost::system::error_code ec, tcp::endpoint) {
                 if (!ec) {
                     std::cout << "Client: Connected to server" << std::endl;
+                    // FIX 1: Start listening for data as soon as we connect.
+                    do_read(); 
                 } else {
                     std::cout << "Client: Connection failed: " << ec.message() << std::endl;
                 }
@@ -47,6 +54,14 @@ private:
             [this](boost::system::error_code ec, std::size_t length) {
                 if (!ec) {
                     std::cout << "Client received: " << std::string(data_, length) << std::endl;
+                    
+                    // FIX 2: Listen for the next message to create a read loop.
+                    do_read(); 
+                } else {
+                    // Don't report an error if the server simply closes the connection.
+                    if (ec != boost::asio::error::eof) {
+                        std::cerr << "Client read error: " << ec.message() << std::endl;
+                    }
                 }
             });
     }
@@ -57,6 +72,7 @@ private:
     char data_[max_length];
 };
 
+// The main function is required for the program to link and run.
 int main() {
     try {
         boost::asio::io_context io_context;
@@ -69,7 +85,11 @@ int main() {
         
         // Start the io_context in a separate thread
         std::thread io_thread([&io_context]() {
-            io_context.run();
+            try {
+                io_context.run();
+            } catch (std::exception& e) {
+                std::cerr << "IO thread exception: " << e.what() << std::endl;
+            }
         });
         
         // Give connection time to establish
@@ -91,7 +111,9 @@ int main() {
         std::cin.get();
         
         io_context.stop();
-        io_thread.join();
+        if (io_thread.joinable()) {
+            io_thread.join();
+        }
         
     } catch (std::exception& e) {
         std::cerr << "Client exception: " << e.what() << std::endl;
