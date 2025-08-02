@@ -5,7 +5,9 @@
 
 using boost::asio::ip::tcp;
 
-class Session : public std::enable_shared_from_this<Session> {
+class Session : public std::enable_shared_from_this<Session> { 
+    //When a class inherits from std::enable_shared_from_this, it can safely create a std::shared_ptr to itself from within a member function.
+    //The calls to shared_from_this() below ensure that all shared_ptr instances managing the object share ownership correctly, preventing issues like double deletion or dangling pointers.==> important in asynchronous operations (like Boost.Asio handlers) to keep the object alive as long as the operation is pending.
 public:
     Session(tcp::socket socket) : socket_(std::move(socket)) {}
     
@@ -15,19 +17,24 @@ public:
 
 private:
     void do_read() {
-        auto self(shared_from_this());
+        auto self(shared_from_this());//Shared pointer - also see line 32 - This keeps the Session object alive during the async operation, even if the original owner goes out of scope
+        //The alternative is to use a regular shared pointer in two places, but the two places can call delete, causing double delete
+        //auto p = std::make_shared<Session>(this);
+
         socket_.async_read_some(
-            boost::asio::buffer(data_, max_length),
-            [this, self](boost::system::error_code ec, std::size_t length) {
-                if (!ec) {
-                    std::cout << "Server received: " << std::string(data_, length) << std::endl;
-                    do_write(length);
+            boost::asio::buffer(data_, max_length),//Read data less or equal to max_length
+            [this, self](boost::system::error_code ec, std::size_t length) { //Actual length read is provided to the lambda
+                if (!ec) { //If no error during read, then write
+                    std::cout << "Server received: " << std::string(data_, length) << std::endl;//data_ is a closure in the lambda
+                    do_write(length);//Then wrote out the data
                 }
             });
     }
     
     void do_write(std::size_t length) {
-        auto self(shared_from_this());
+        auto self(shared_from_this());//Shared pointer - also see line 18 - This keeps the Session object alive during the async operation, even if the original owner goes out of scope
+        //The alternative is to use a regular shared pointer in two places, but the two places can call delete, causing double delete
+        //auto p = std::make_shared<Session>(this);
         
         // Echo the message back with a prefix
         std::string response = "Echo: " + std::string(data_, length);
@@ -37,7 +44,7 @@ private:
             socket_, 
             boost::asio::buffer(data_, response.length()),
             [this, self](boost::system::error_code ec, std::size_t /*length*/) {
-                if (!ec) {
+                if (!ec) { //If no error during write, then read
                     do_read();
                 }
             });
@@ -61,9 +68,9 @@ private:
             [this](boost::system::error_code ec, tcp::socket socket) {
                 if (!ec) {
                     std::cout << "Server: New client connected" << std::endl;
-                    std::make_shared<Session>(std::move(socket))->start();
+                    std::make_shared<Session>(std::move(socket))->start();//Move object and call function immediately
                 }
-                do_accept();
+                do_accept();//Asynchronous recursive
             });
     }
     

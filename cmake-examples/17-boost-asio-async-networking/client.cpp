@@ -34,9 +34,7 @@ private:
         tcp::resolver resolver(io_context_);
         auto endpoints = resolver.resolve(host, port);
         
-        boost::asio::async_connect(
-            socket_, 
-            endpoints,
+        boost::asio::async_connect(socket_, endpoints,
             [this](boost::system::error_code ec, tcp::endpoint) {
                 if (!ec) {
                     std::cout << "Client: Connected to server" << std::endl;
@@ -49,8 +47,7 @@ private:
     }
     
     void do_read() {
-        socket_.async_read_some(
-            boost::asio::buffer(data_, max_length),
+        socket_.async_read_some(boost::asio::buffer(data_, max_length),
             [this](boost::system::error_code ec, std::size_t length) {
                 if (!ec) {
                     std::cout << "Client received: " << std::string(data_, length) << std::endl;
@@ -78,22 +75,22 @@ int main() {
         boost::asio::io_context io_context;
         
         // Connect to localhost by default, or specify different host
-        std::string host = "127.0.0.1";
+        std::string host = "127.0.0.1";//localhost (loopback IP address)
         std::string port = "12345";
         
         Client client(io_context, host, port);
         
-        // Start the io_context in a separate thread
+        // Start the io_context in a separate thread - probably has an event loop inside it and requires its own thread
         std::thread io_thread([&io_context]() {
             try {
-                io_context.run();
+                io_context.run();//Probably where the event loop is happening
             } catch (std::exception& e) {
                 std::cerr << "IO thread exception: " << e.what() << std::endl;
             }
         });
         
         // Give connection time to establish
-        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));//Give 100ms for io_context thread to start running
         
         // Send some messages
         std::cout << "Client: Sending messages..." << std::endl;

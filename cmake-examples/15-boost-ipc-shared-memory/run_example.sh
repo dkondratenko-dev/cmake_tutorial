@@ -1,9 +1,12 @@
 #!/bin/bash
+#The .sh extension means "SHell" script
+
+#Run this file from terminal. It will build the executables and then run both writer and reader
 echo "Building project..."
 ./build.sh
 
 echo "Starting writer in background..."
-# The writer will now exit on its own, so we don't need its PID
+# The writer will now exit on its own, so we don't need its PID. The & makes it run in the background
 ./build/writer &
 
 # This sleep is still a good idea to ensure the writer has

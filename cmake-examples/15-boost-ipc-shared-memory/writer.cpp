@@ -5,7 +5,7 @@
 #include <thread>
 #include <chrono>
 
-using namespace boost::interprocess;
+using namespace boost::interprocess;//Has library features like sdt::cout << boost::backtrace::backtrace(); //prints call stack
 
 int main() {
     try {
@@ -13,13 +13,13 @@ int main() {
         shared_memory_object::remove("SharedMemoryExample");
 
         // Create the shared memory object
-        shared_memory_object shm(create_only, "SharedMemoryExample", read_write);
+        shared_memory_object shm(create_only, "SharedMemoryExample", read_write);//Tells OS kernel to create a named object (inside kernel) and allocate RAM memory to it. The "create only" option will throw an exception if it is already created
         
         // Set size
         shm.truncate(1024);
 
         // Map the memory
-        mapped_region region(shm, read_write);
+        mapped_region region(shm, read_write);//This tells kernel to map this area of RAM to the virtual memory of the process. Kernel monitors this virtual memory and prevents one process from accessing the virtual memory of another process
         
         // Get the address of the mapped region
         void* addr = region.get_address();

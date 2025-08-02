@@ -33,7 +33,7 @@ int main() {
         mapped_region region(shm, read_write);
         
         // Construct the shared data in the mapped region
-        SharedData* data = new(region.get_address()) SharedData;
+        SharedData* data = new(region.get_address()) SharedData;//This is a Placement New - The syntax new (region.get_address()) T() works with pre-allocated memory instead of allocating new memory. So, the object of type T is constructed at the specified address, but no new memory is allocated.
         data->counter = 0;
         data->finished = false;
         std::strcpy(data->message, "Initial message");

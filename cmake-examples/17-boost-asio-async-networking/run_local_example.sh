@@ -1,4 +1,5 @@
 #!/bin/bash
+#The .sh extension means "SHell" script
 echo "Building project..."
 ./build.sh
 

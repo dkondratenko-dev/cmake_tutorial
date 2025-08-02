@@ -4,7 +4,7 @@
 #include <thread>
 #include <chrono>
 
-using namespace boost::interprocess;
+using namespace boost::interprocess;//Has library features like sdt::cout << boost::backtrace::backtrace(); //prints call stack
 
 int main() {
     try {
@@ -26,7 +26,7 @@ int main() {
         // *** THIS IS THE CRITICAL ADDITION ***
         // The reader now removes the shared memory object once it's done.
         std::cout << "Reader: Cleaning up shared memory..." << std::endl;
-        shared_memory_object::remove("SharedMemoryExample");
+        shared_memory_object::remove("SharedMemoryExample");//So process removes shared memory created by another process. This can create problems.
 
     } catch (const std::exception& e) {
         std::cerr << "Reader error: " << e.what() << std::endl;
