@@ -1,0 +1,25 @@
+{
+    // The schema version for launch configurations.
+    "version": "0.2.0",
+
+    // The 'configurations' key holds an array of all available launch profiles.
+    "configurations": [
+        {
+            // --- Configuration : The profile for attaching to GDBServer ---
+            // This profile connects to an already-waiting gdbserver instance.
+            "name": "Remote Attach with GDBServer",
+            "type": "cppdbg",
+            // The request is "launch" because VSCode is launching the GDB *client*.
+            "request": "launch", 
+            // Path to the executable with debug symbols. This is crucial for GDB
+            // to map the remote code to your local source files.
+            "program": "${workspaceFolder}/build/long_running",
+            "MIMode": "gdb",
+            // The network address of the waiting gdbserver. 'localhost' works because
+            // your VSCode session is already running inside the remote environment.
+            "miDebuggerServerAddress": "localhost:9999",
+            "cwd": "${workspaceFolder}"
+        }
+        // You can add more configurations here, separated by a comma.
+    ]
+}

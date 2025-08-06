@@ -9,9 +9,13 @@ class DataProcessor {
 private:
     std::vector<int> data;
     int processedCount = 0;
+    int pid = 0;
     
 public:
     void processData() {
+        pid = getpid();
+        std::cout << "DataProcessor started to process data with PID: " << pid << std::endl;
+        
         while (true) {
             // Simulate some work
             data.push_back(processedCount);

@@ -511,48 +511,70 @@ Tasks can do much more than just compile code. They can check dependencies, run 
 
 The beauty of this system is that each task can depend on others, creating a pipeline. When you run "full-pipeline", it automatically runs all the dependent tasks in order. It's like dominoes - push one, and the others follow in sequence. Pre-build tasks ensure your environment is ready, the build task compiles your code, and post-build tasks handle testing and packaging.
 
-## Part 5: Attaching to Running Processes (5 minutes)
+### **Attaching to a Running Process with GDBServer**
 
-### When Launch Isn't Enough
+Attaching a debugger to a process that is already running is a critical technique for diagnosing issues in long-running services or applications without restarting them. The most robust method for this in a remote or containerized environment is to use `gdbserver`.
 
-Sometimes you need to debug a program that's already running, perhaps a server that only shows problems after hours of operation. This is where process attachment becomes invaluable. Create this program to practice with:
+This approach separates the debugger into two parts:
 
-```cpp
-#include <iostream>
-#include <thread>
-#include <chrono>
-#include <unistd.h>  // For getpid()
+* **`gdbserver` (the server):** A lightweight program that runs on the remote machine. It takes control of the target process and waits for instructions over the network.
+* **`gdb` (the client):** The full debugger, controlled by VSCode, which runs and connects to `gdbserver` from your development environment.
 
-int main() {
-    std::cout << "Process started with PID: " << getpid() << std::endl;
-    std::cout << "You can attach a debugger to this process" << std::endl;
-    
-    int counter = 0;
-    while (true) {
-        counter++;
-        if (counter % 10 == 0) {
-            std::cout << "Still running... count: " << counter << std::endl;
-        }
-        std::this_thread::sleep_for(std::chrono::seconds(1));
+#### **Step 1: Start `gdbserver` on the Remote Machine**
+
+First, you need to identify the Process ID (PID) of your running application and attach `gdbserver` to it.
+
+1. Connect to your remote server via SSH or open a terminal in your running Docker container.
+2. Find the PID of your application. For an executable named `long_running`, you can use `pgrep`:
+
+    ```bash
+    pgrep long_running
+    # Example output: 12345
+    ```
+
+3. Attach `gdbserver` to the process. This command will take control of the process (pausing its execution) and start listening on a network port for a debugger client.
+
+    ```bash
+    # Attach gdbserver to PID 12345 and listen on port 9999
+    gdbserver --attach :9999 12345
+    ```
+
+    Your terminal will now display a message like `Listening on port 9999` and will wait.
+
+#### **Step 2: Configure VSCode to Connect to `gdbserver`**
+
+Next, configure VSCode to connect to the waiting `gdbserver` instance.
+
+0. Open just one folder in vs code - **19_remote_debugging** (not the whole cmake-examples repository)
+1. In your VSCode window (which should be connected to the remote environment via SSH or Dev Container), open the `.vscode/launch.json` file.
+2. Add a new configuration specifically for attaching to `gdbserver`:
+
+    ```json
+    {
+        "version": "0.2.0",
+
+        "configurations": [
+            {
+                "name": "Remote Attach with GDBServer",
+                "type": "cppdbg",
+                "request": "launch", 
+                "program": "${workspaceFolder}/build/long_running",
+                "MIMode": "gdb",
+                "miDebuggerServerAddress": "localhost:9999",
+                "cwd": "${workspaceFolder}"
+            }
+        ]
     }
-    return 0;
-}
-```
+    ```
 
-Compile and run this program in a terminal: `g++ -g -o long_running long_running.cpp && ./long_running`. Note the PID it prints. Now add this configuration to your `launch.json`:
+    **A key point on `"miDebuggerServerAddress"`:** Since your VSCode session is already running on the remote machine (via the Remote-SSH or Dev Containers extension), `localhost` correctly refers to the machine where `gdbserver` is also running.
 
-```json
-{
-    "name": "Attach to Process",
-    "type": "cppdbg",
-    "request": "attach",
-    "program": "${workspaceFolder}/long_running",
-    "processId": "${command:pickProcess}",  // Shows a process picker
-    "MIMode": "gdb"
-}
-```
+#### **Step 3: Start the Debug Session**
 
-When you run this debug configuration, VSCode will show you a list of running processes. Select your long_running process, and VSCode will attach to it. You can now set breakpoints and debug the already-running program. This is like becoming a detective who can freeze time and examine a crime scene that's already in progress.
+1. From the "Run and Debug" view in VSCode, select the **"Remote Attach with GDBServer"** configuration from the dropdown menu.
+2. Press `F5` to start debugging.
+
+VSCode will command its internal `gdb` client to connect to `localhost:9999`. Once connected, it will load the debug symbols from the file specified in `"program"`, and your debug session will be live. You can now inspect the call stack, view variables, and step through the code of the remote process as if you had launched it from the debugger.
 
 ## Practical Exercises and Troubleshooting (5 minutes)
 

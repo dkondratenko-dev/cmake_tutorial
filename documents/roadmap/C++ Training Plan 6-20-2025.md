@@ -54,7 +54,7 @@ Some topics are available in: **documents/2025**
 	- [x] NUMA (Non-Uniform Memory Access)
 	- [x] Kernel bypass
 - [ ] VSCode in Linux (2 weeks)
-	- [ ] Debugging code running on a remote Linux server	
+	- [x] Debugging code running on a remote Linux server	
 	- [ ] Debug a remote Docker container
 	- [ ] Add simple steps with tasks.json file 
 		- [ ] pre-build task to run before build - check dependency, setup environment
