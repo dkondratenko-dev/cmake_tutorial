@@ -1,0 +1,22 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build-cpp",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-g",                              // Include debug symbols
+                "${workspaceFolder}/src/main.cpp",    // Source file
+                "-o",
+                "${workspaceFolder}/main"         // Output executable
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": ["$gcc"],           // Parses g++ errors
+            "detail": "Compiler: g++"
+        }
+    ]
+}

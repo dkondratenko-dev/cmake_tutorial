@@ -39,20 +39,20 @@ Some topics are available in: **documents/2025**
 	- [x] Play around with cache friendly data structures
 	- [x] Inline assembly (basic level)
 	- [x] Memory ordering
-- [ ] Systems and network Programming
+- [x] Systems and network Programming
 	- [x] TCP/UDP, sockets
-	- [ ] Boost.Interprocess (simple hello world between two processes with shared memory or memory-mapped files)
-	- [ ] Boost.Interprocess (simple hello world with shared object or container and synchronization object like mutex)
-	- [ ] Boost.Asio (simple async hello world between two processes on different pcs)
+	- [x] Boost.Interprocess (simple hello world between two processes with shared memory or memory-mapped files)
+	- [x] Boost.Interprocess (simple hello world with shared object or container and synchronization object like mutex)
+	- [x] Boost.Asio (simple async hello world between two processes on different pcs)
 	- [x] Wireshark basics
 	- [x] Network latency test
 	- [x] Multicast
 	- [X] Compile w/flags
-	- [ ] Paging
-	- [ ] Cache (OS/CPU)
-	- [ ] Scheduling, CPU affinity
-	- [ ] NUMA (Non-Uniform Memory Access)
-	- [ ] Kernel bypass
+	- [x] Paging
+	- [x] Cache (OS/CPU)
+	- [x] Scheduling, CPU affinity
+	- [x] NUMA (Non-Uniform Memory Access)
+	- [x] Kernel bypass
 - [ ] VSCode in Linux (2 weeks)
 	- [ ] Debugging code running on a remote Linux server	
 	- [ ] Debug a remote Docker container
