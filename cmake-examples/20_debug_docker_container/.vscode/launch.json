@@ -1,0 +1,16 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Attach to gdbserver in Docker",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/long_running",
+      "miDebuggerServerAddress": "localhost:9999",
+      "miDebuggerPath": "/usr/bin/gdb",
+      "cwd": "${workspaceFolder}",
+      "externalConsole": false,
+      "MIMode": "gdb"
+    }
+  ]
+}

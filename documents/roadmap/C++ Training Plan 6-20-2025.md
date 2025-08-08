@@ -55,11 +55,12 @@ Some topics are available in: **documents/2025**
 	- [x] Kernel bypass
 - [ ] VSCode in Linux (2 weeks)
 	- [x] Debugging code running on a remote Linux server	
-	- [ ] Debug a remote Docker container
-	- [ ] Add simple steps with tasks.json file 
-		- [ ] pre-build task to run before build - check dependency, setup environment
-		- [ ] post build task to run after build - run tests, package artifacts, deply to unix server?(xcopy, run script, etc)
-- [ ] AOP in c++ -- Aspect Oriented Programming (AOP) is not popular in c++. Only Java and C#
+	- [x] Debug a remote Docker container
+	- [x] Add simple steps with tasks.json file 
+		- [x] pre-build task to run before build - check dependency, setup environment
+		- [x] post build task to run after build - run tests, package artifacts, deply to unix server?(xcopy, run script, etc)
+- [x] AOP in c++ -- Aspect Oriented Programming (AOP) is not popular in c++. Only Java and C#
+- [ ] Bash profile
 
 Docker(August - start to middle) 
 

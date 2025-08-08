@@ -17,7 +17,7 @@
             "MIMode": "gdb",
             // The network address of the waiting gdbserver. 'localhost' works because
             // your VSCode session is already running inside the remote environment.
-            "miDebuggerServerAddress": "localhost:9999",
+            "miDebuggerServerAddress": "127.0.0.1:9999",
             "cwd": "${workspaceFolder}"
         }
         // You can add more configurations here, separated by a comma.

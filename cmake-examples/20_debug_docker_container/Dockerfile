@@ -1,18 +1,12 @@
 FROM ubuntu:22.04
 
-# Install necessary tools
-RUN apt-get update && apt-get install -y \
-    g++ \
-    gdb \
-    gdbserver \
-    make
+RUN apt-get update && apt-get install -y g++ gdb gdbserver
 
-# Copy your source code
 WORKDIR /app
 COPY . .
 
-# Compile the program with debug symbols
-RUN g++ -g -o main main.cpp
+RUN g++ -g -o long_running long_running.cpp
 
-# Keep container running
-CMD ["tail", "-f", "/dev/null"]
+EXPOSE 9999
+
+CMD ["gdbserver", ":9999", "./long_running"]

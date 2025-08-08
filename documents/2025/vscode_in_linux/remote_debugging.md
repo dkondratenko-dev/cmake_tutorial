@@ -511,7 +511,94 @@ Tasks can do much more than just compile code. They can check dependencies, run 
 
 The beauty of this system is that each task can depend on others, creating a pipeline. When you run "full-pipeline", it automatically runs all the dependent tasks in order. It's like dominoes - push one, and the others follow in sequence. Pre-build tasks ensure your environment is ready, the build task compiles your code, and post-build tasks handle testing and packaging.
 
-### **Attaching to a Running Process with GDBServer**
+Sure! Here's a small doc in English about how to add pre-build and post-build tasks in **VSCode on Linux** (over a 2-week learning plan), including your points:
+
+---
+
+## **pre-build** and **post-build** tasks
+
+This guide explains how to set up **pre-build** and **post-build** tasks in VSCode on Linux, to automate workflows like checking dependencies, setting up the environment before build, and running tests or deploying after build.
+
+---
+
+### Understanding VSCode Tasks
+
+#### What are VSCode Tasks?
+
+* VSCode tasks automate command line actions inside the editor.
+* Defined in `tasks.json` file.
+* You can chain tasks, set dependencies, and run them manually or automatically.
+
+---
+
+## Week 2: Implementing Pre-build and Post-build Tasks
+
+### 1. Create `tasks.json`
+
+* In VSCode, open the Command Palette (`Ctrl+Shift+P`)
+* Type `Tasks: Configure Task`
+* Select `Create tasks.json file from template` (choose Shell or Others)
+* This creates `.vscode/tasks.json` in your project folder.
+
+---
+
+### 2. Define Pre-build Task (e.g. check dependencies, setup environment)
+
+Example:
+
+```json
+{
+    "label": "pre-build",
+    "type": "shell",
+    "command": "./scripts/check_deps.sh",
+    "problemMatcher": []
+}
+```
+
+This task runs a shell script to check dependencies before building.
+
+---
+
+### 3. Define Build Task
+
+Example:
+
+```json
+{
+    "label": "build",
+    "type": "shell",
+    "command": "make all",
+    "dependsOn": "pre-build",
+    "problemMatcher": ["$gcc"]
+}
+```
+
+* `"dependsOn": "pre-build"` makes the build task run **after** pre-build task completes successfully.
+
+---
+
+### 4. Define Post-build Task (e.g. run tests, package, deploy)
+
+Example:
+
+```json
+{
+    "label": "post-build",
+    "type": "shell",
+    "command": "./scripts/post_build.sh",
+    "dependsOn": "build",
+    "problemMatcher": []
+}
+```
+
+---
+
+### 5. Run the full workflow
+
+* Run the `post-build` task manually from Command Palette or bind it to a shortcut.
+* This triggers: `pre-build` → `build` → `post-build` sequentially.
+
+## **Attaching to a Running Process with GDBServer**
 
 Attaching a debugger to a process that is already running is a critical technique for diagnosing issues in long-running services or applications without restarting them. The most robust method for this in a remote or containerized environment is to use `gdbserver`.
 
@@ -520,7 +607,7 @@ This approach separates the debugger into two parts:
 * **`gdbserver` (the server):** A lightweight program that runs on the remote machine. It takes control of the target process and waits for instructions over the network.
 * **`gdb` (the client):** The full debugger, controlled by VSCode, which runs and connects to `gdbserver` from your development environment.
 
-#### **Step 1: Start `gdbserver` on the Remote Machine**
+### **Step 1: Start `gdbserver` on the Remote Machine**
 
 First, you need to identify the Process ID (PID) of your running application and attach `gdbserver` to it.
 
@@ -541,7 +628,7 @@ First, you need to identify the Process ID (PID) of your running application and
 
     Your terminal will now display a message like `Listening on port 9999` and will wait.
 
-#### **Step 2: Configure VSCode to Connect to `gdbserver`**
+### **Step 2: Configure VSCode to Connect to `gdbserver`**
 
 Next, configure VSCode to connect to the waiting `gdbserver` instance.
 
@@ -569,7 +656,7 @@ Next, configure VSCode to connect to the waiting `gdbserver` instance.
 
     **A key point on `"miDebuggerServerAddress"`:** Since your VSCode session is already running on the remote machine (via the Remote-SSH or Dev Containers extension), `localhost` correctly refers to the machine where `gdbserver` is also running.
 
-#### **Step 3: Start the Debug Session**
+### **Step 3: Start the Debug Session**
 
 1. From the "Run and Debug" view in VSCode, select the **"Remote Attach with GDBServer"** configuration from the dropdown menu.
 2. Press `F5` to start debugging.
