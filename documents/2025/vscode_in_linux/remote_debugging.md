@@ -20,7 +20,7 @@ If you're using your own Linux machine for testing, you'll also need to ensure S
 
 For today's demonstration, we'll use a clever trick - we'll connect to our own machine through SSH, treating it as if it were remote. This gives us all the experience of remote debugging without needing multiple machines. In VSCode, press F1 to open the command palette and type "Remote-SSH: Connect to Host". You'll see a prompt asking for the SSH connection string.
 
-Enter `localhost` or `127.0.0.1` for local testing, or use `username@ip-address` for an actual remote machine. For example: `developer@192.168.1.100`. VSCode will ask for your password, and then magic happens - a new VSCode window opens that's actually running on the target machine! You'll see a green indicator in the bottom-left corner showing "SSH: localhost" or your remote host name.
+Enter `localhost` or `127.0.0.1` for local testing, or use `username@ip-address` for an actual remote machine. For example: `developer@192.168.1.100`. You will also see an option "Select SSH configuration file to update". This will save IP Address for the remote to a config file that you specify. Recommend save at /home/{username}/.ssh/config. Next, VSCode will ask for your password, and then magic happens - a new VSCode window opens that's actually running on the target machine! You'll see a green indicator in the bottom-left corner showing "SSH: localhost" or your remote host name. 
 
 ### Step 2: Installing Extensions in the Remote Environment (Critical Step!)
 
