@@ -4,7 +4,15 @@
 #include <vector>
 #include <unistd.h>
 
-// A simple server simulation that we can attach to while running
+// A simple server simulation that we can attach to while running - see /documents/2025/vscode_in_linux/remote_debugging.md, Docker Container Debugging Method 2: Manual Docker with GDB Server
+//Requires running GDB server on the remote server
+//To get the PID of this application, at terminal enter 
+//$pgrep long_running              -------------should give PID
+//  #Example output: 484055
+//Next we attach gdbserver to PID 12345 and listen on port 9999       
+//$gdbserver --attach :9999 484055
+//  Attached: pid = 484055
+//  Listening on port 9999
 class DataProcessor {
 private:
     std::vector<int> data;
