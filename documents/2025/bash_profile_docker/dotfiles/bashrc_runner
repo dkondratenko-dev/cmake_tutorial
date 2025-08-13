@@ -1,0 +1,45 @@
+# AnyProfile v1.0.1 - A modular profile loader.
+#
+echo "AnyProfile v1.0.1 started"
+
+#
+# Recursively finds all files within a given directory and sources them.
+#
+source_all() {
+    # 1. Validate input
+    if [[ -z "$1" || ! -d "$1" ]]; then
+        echo "Error: [source_all] Please provide a valid directory path." >&2
+        return 1
+    fi
+
+    local target_dir="$1"
+    echo "Recursively sourcing scripts from: $target_dir"
+
+    # 2. Find and source all readable files
+    while IFS= read -r -d '' file; do
+        if [[ -r "$file" ]]; then
+            echo " -> Sourcing '$file'"
+            . "$file" # '.' is a portable alias for the 'source' command
+        else
+            echo " -> Skipping non-readable file '$file'"
+        fi
+    done < <(find "$target_dir" -type f -print0)
+}
+
+# --- AUTOMATIC DIRECTORY DETECTION ---
+# This is the correct way to get the directory of the *currently sourced* script in Bash.
+# It reliably works even when this script is called from .bashrc.
+BP_DOT_FILES_DIR="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
+BP_DIR="$BP_DOT_FILES_DIR/bashprofile"
+
+
+# --- EXECUTION ---
+#
+# Use the detected directory to find the 'bashprofile' subdirectory.
+source_all "$BP_DIR"
+
+echo "AnyProfile loading complete."
+
+# Clean up the environment by unsetting the function and variable
+# to avoid polluting the global namespace.
+unset -f source_all
