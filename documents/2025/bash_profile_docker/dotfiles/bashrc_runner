@@ -40,6 +40,14 @@ source_all "$BP_DIR"
 
 echo "AnyProfile loading complete."
 
+alias scrp="bp_source_profile"
+alias srcp="bp_source_profile"
+
+bp_source_profile() {
+    source "$BP_DOT_FILES_DIR/bashrc_runner"
+}
+
+
 # Clean up the environment by unsetting the function and variable
 # to avoid polluting the global namespace.
 unset -f source_all

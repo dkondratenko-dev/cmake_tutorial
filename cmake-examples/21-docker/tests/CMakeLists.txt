@@ -1,0 +1,5 @@
+add_executable(DataProcessorTests DataProcessorTests.cpp)
+target_link_libraries(DataProcessorTests PRIVATE mylib gtest_main)
+
+include(GoogleTest)
+gtest_discover_tests(DataProcessorTests)

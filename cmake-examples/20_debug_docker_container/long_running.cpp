@@ -18,9 +18,7 @@ public:
         
         while (true) {
             // Simulate some work
-            std::cout << "@@@@@@@@@ 1\n";
             data.push_back(processedCount);
-            std::cout << "@@@@@@@@@ 2\n";
             std::cout << processedCount << "Allocated memory, but forgot to free it.\n";
 
             // This is where interesting things happen
@@ -32,11 +30,8 @@ public:
             processedCount++;
             
             // Clear vector periodically to avoid memory growth
-            std::cout << "@@@@@@@@@ 3\n";
             if (data.size() > 1000) {
-                std::cout << "@@@@@@@@@ 4\n";
                 data.clear();
-                std::cout << "@@@@@@@@@ 5\n";
                 std::cout << "Cleared data buffer" << std::endl;
             }
             

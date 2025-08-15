@@ -1,6 +1,11 @@
-alias scrp="bp_source_profile"
-alias srcp="bp_source_profile"
+bp_build() {
+    mkdir -p build
+    cd build
+    cmake ..
+    make
+}
 
-bp_source_profile() {
-    source "$BP_DOT_FILES_DIR/bashrc_runner"
+bp_build_ls() {
+    bp_build
+    ls
 }
