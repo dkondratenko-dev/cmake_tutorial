@@ -1,0 +1,42 @@
+bp_print_welcome_message ${BASH_SOURCE[0]}
+
+# Impl, etc profiles except .profile & .profile.aliases would not be displayed in the help
+# and can be used to add additional functios to the profile which is hidden from the help menu
+
+mk_impl_run_command()                # - make code format
+{
+    local command=($@)
+
+    if [ ${#command[@]} -eq 0 ]; then
+        echo "Please pass the command to run"
+        return 1
+    fi
+
+    local prev_dir=$(pwd)
+
+    # Run cmake if build directory does not exists
+    if [ ! -d $BP_PROJECT_BUILD_DIR ]; then
+        mkdir -p $BP_PROJECT_BUILD_DIR
+        cd $BP_PROJECT_BUILD_DIR
+        local BUILD_OPTIONS="-DEmaster_ENABLE_UNIT_TESTS=ON -DEmaster_ENABLE_CODE_ANALYSIS=ON -DEmaster_ENABLE_COMPONENT_TESTS=ON -DEmaster_ENABLE_CODE_COVERAGE=ON"
+        cmake $BUILD_OPTIONS ..
+    fi
+
+    cd $BP_PROJECT_BUILD_DIR
+    echo "Current dir: $(pwd)"
+
+    echo "Running: ${command[*]}"
+
+    "${command[@]}"
+    hlp_get_command_call_string_result
+
+    local resultMsg=">>> $HLP_COMMAND_CALL_STRING_RESULT : ${command[*]}"
+
+    echo
+    echo $resultMsg
+    echo
+
+    cd $prev_dir
+
+    return $HLP_COMMAND_CALL_RESULT
+}

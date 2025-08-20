@@ -1,0 +1,29 @@
+#ifndef __Emaster_$CLASSNAME_H__
+#define __Emaster_$CLASSNAME_H__
+
+#include "utils/BoostSignals.h"
+
+namespace Emaster {
+
+class $ClassName {
+public:
+    struct Signals : public Boost::Signals {
+        signal<void(const UserID)> signalName;
+    };
+
+    Signals signals;
+
+public :
+   $ClassName();
+   ~$ClassName();
+
+    auto getSomething() const;
+    void setSomething(int);
+
+private:
+    int m_member;
+};
+
+} // namespace Emaster
+
+#endif // __Emaster_$CLASSNAME_H__

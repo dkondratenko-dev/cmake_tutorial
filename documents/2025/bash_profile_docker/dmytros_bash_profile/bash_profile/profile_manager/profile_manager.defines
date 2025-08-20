@@ -1,0 +1,21 @@
+BP_PROFILE_TYPE_DESKTOP="desktop"
+BP_PROFILE_TYPE_DOCKER="docker"
+BP_PROFILE_TYPE_MTTF="mttf"
+
+BP_CURRENT_PROFILE_TYPE=$BP_CURRENT_PROFILE_TYPE
+
+BP_CONFIG_FILE_NAME="emaster_bash_profile.config"
+BP_CONFIG_FULL_PATH="$HOME/$BP_CONFIG_FILE_NAME"
+
+
+bp_print_welcome_message()
+{
+    if [[ $BP_SHOW_WELCOME_MESSAGE == 0 ]]; then
+        return 0
+    fi
+
+    local profileFullPath=$1
+    local msg=$2
+    local profileName=$(basename $profileFullPath)
+    echo "$profileName has been loaded successfully! $msg"
+}

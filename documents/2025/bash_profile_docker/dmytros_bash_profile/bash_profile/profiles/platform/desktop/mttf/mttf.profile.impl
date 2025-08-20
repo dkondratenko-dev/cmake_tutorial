@@ -1,0 +1,29 @@
+portSharedFilePath="/tmp/mttf_port.txt"
+
+__get_mttf_port()
+{
+    if [ ! -z "$MTTF_PORT" ]; then
+        echo "Port is already set: $MTTF_PORT"
+        return
+    fi
+
+    if [ -f $portSharedFilePath ]; then
+        MTTF_PORT=$(cat $portSharedFilePath)
+    fi
+
+    if [ -z "$MTTF_PORT" ]; then
+        read -p "Enter the port number: " MTTF_PORT
+    fi
+
+    echo $MTTF_PORT > $portSharedFilePath
+    return $MTTF_PORT
+}
+
+__mttf_reset_port()
+{
+    MTTF_PORT=""
+
+    if [ -f $portSharedFilePath ]; then
+        rm $portSharedFilePath
+    fi
+}

@@ -1,0 +1,9 @@
+bp_print_welcome_message ${BASH_SOURCE[0]}
+
+cdimpl_cd()
+{
+    cd $1
+    pwd
+
+    cmd_crossplatform_run set_tab_title_as_folder_name
+}

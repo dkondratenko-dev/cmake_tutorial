@@ -328,58 +328,152 @@ Now you can debug! Set a breakpoint on line 35 (where we call `calc.add(10, 20)`
 
 Sometimes you can't use Dev Containers - maybe you're working with an existing Docker setup or need more control. Let me show you how to debug manually using gdbserver. This method helps you understand what's really happening under the hood.
 
-First, create a different Dockerfile for this approach. Call it `Dockerfile.gdbserver`:
+You can refer to this example, where the entire project is already set up: [cmake-examples/21-docker](https://github.com/dkondratenko-dev/cmake_tutorial/tree/main/cmake-examples/21-docker)
+
+If you go with the 21-docker example it is recommended to open only that folder (21-docker) inside vs code.
+
+1. First, create a different Dockerfile for this approach. Call it `Dockerfile`:
 
 ```dockerfile
 FROM ubuntu:22.04
 
 RUN apt-get update && apt-get install -y \
-    build-essential \
-    gdb \
-    gdbserver
+    g++ gdb gdbserver cmake git make
+
+ARG UID=1000
+ARG GID=1000
+
+RUN groupadd -g ${GID} devgroup \
+    && useradd -m -u ${UID} -g ${GID} devuser
+
+USER devuser
 
 WORKDIR /app
-COPY calculator.cpp .
 
-# Compile with debug symbols
-RUN g++ -g -O0 -o calculator calculator.cpp
-
-# Expose port for gdbserver
-EXPOSE 9999
-
-# Start gdbserver listening on port 9999
-CMD ["gdbserver", ":9999", "./calculator"]
+COPY dev_profile.sh /app/dev_profile.sh
+RUN echo "source /app/dev_profile.sh" >> /home/devuser/.bashrc
 ```
 
-Build and run this container:
+2. cd into project directory.
+3. Build and run this container:
 
 ```bash
-docker build -f Dockerfile.gdbserver -t cpp-debug-server .
-docker run -p 9999:9999 --name debug-container cpp-debug-server
+docker build -t cpp-gtest-debug .
+docker run -it --name cpp-debug -v $(pwd):/app -p 9999:9999 cpp-gtest-debug
 ```
 
-The container is now running gdbserver, waiting for a debugger to connect. In your local VSCode (not in a container), add this configuration to launch.json:
+4. Build the application inside the Docker container:
+
+in case 21-docker example use build alias - type 'b' and hit Enter:
+
+```bash
+devuser@e5c0f518db67:/app$ b
+```
+
+In case manual build:
+
+```bash
+devuser@e5c0f518db67:/app$ mkdir build
+devuser@e5c0f518db67:/app$ cd build/
+devuser@e5c0f518db67:/app/build$ cmake ..
+devuser@e5c0f518db67:/app/build$ make
+```
+
+Important! Don't forget to build the application with the debug symbols. In 21-docker example cmake file, Debug build is set by default.
+If you don't use 21-docker example, do the debug configuration manually:
+
+```bash
+cmake .. -DCMAKE_BUILD_TYPE=Debug
+```
+
+5. Execute the binary:
+
+```bash
+devuser@e5c0f518db67:/app/build$ app/long_running 
+```
+
+6. Open new terminal and attach to running Docker container:
+
+See the list of running containers:
+
+```bash
+$ docker ps
+CONTAINER ID   IMAGE             COMMAND       CREATED         STATUS         PORTS                                         NAMES
+e5c0f518db67   cpp-gtest-debug   "/bin/bash"   7 minutes ago   Up 7 minutes   0.0.0.0:9999->9999/tcp, [::]:9999->9999/tcp   cpp-debug
+```
+
+Attach to running container using it name from the last "NAMES" column:
+
+```bash
+docker exec -it cpp-debug /bin/bash
+```
+
+7. Now inside the container attach gdbserver to the running process:
+
+```bash
+gdbserver --attach :9999 <pid>
+```
+
+To get application pid use:
+
+```bash
+devuser@e5c0f518db67:/app$ ps aux 
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+devuser        1  0.0  0.0   4628  3616 pts/0    Ss   11:35   0:00 /bin/bash
+devuser      351  0.0  0.0   6064  3260 pts/0    S+   11:41   0:00 app/long_running
+devuser      352  0.0  0.0   4628  3640 pts/1    Ss   11:45   0:00 /bin/bash
+devuser      364  0.0  0.0   7064  2848 pts/1    R+   11:49   0:00 ps aux
+```
+
+The PID for app/long_running is 351 in this case. Attach gdbserver to it:
+
+```bash
+gdbserver --attach :9999 351
+```
+
+Now the Docker side is configured for the remote debugging.
+
+Lets configure the VS Code now,
+
+8. The container is now running gdbserver, waiting for a debugger to connect. In your local VSCode (not in a container), add this configuration to launch.json:
 
 ```json
 {
-    "name": "Connect to Docker GDBServer",
-    "type": "cppdbg",
-    "request": "launch",
-    "program": "${workspaceFolder}/calculator",  // Local copy for symbols
-    "miDebuggerServerAddress": "localhost:9999",
-    "MIMode": "gdb",
-    "cwd": "${workspaceFolder}",
-    "setupCommands": [
+    "version": "0.2.0",
+    "configurations": [
         {
-            "description": "Enable pretty-printing",
-            "text": "-enable-pretty-printing",
-            "ignoreFailures": true
+            "name": "Remote Attach with GDBServer",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/app/long_running",
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",     
+            "miDebuggerServerAddress": "127.0.0.1:9999",
+            "cwd": "${workspaceFolder}",
+            "externalConsole": false,
+            "sourceFileMap": {
+                "/app": "${workspaceFolder}" 
+            }
         }
     ]
 }
 ```
 
 This configuration tells VSCode to connect to gdbserver running inside the Docker container on port 9999. The fascinating part is that VSCode uses your local copy of the source code and executable (for the debug symbols) but actually controls the program running inside the container.
+
+9. To start debugging, just go to the "Run and Debug" view and click "Start debugging" button or press F5
+
+If you stop the debugging from the VS Code, the remote process will be also stopped, the gdbserver will be detached from the process and vs code gdb will be disconnected from the gdbserver.
+
+If you want to restart the debugging, you should start from the step 5.
+
+10. If you want just to debug the application not attaching to the process you can use this way:
+
+the staps 5-7 can be replaced with this:
+
+```bash
+devuser@e5c0f518db67:/app/build$ gdbserver :9999 app/long_running 
+```
 
 ### Method 3: Docker with SSH (Most Flexible)
 

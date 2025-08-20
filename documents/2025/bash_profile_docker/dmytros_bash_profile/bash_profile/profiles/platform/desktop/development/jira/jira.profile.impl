@@ -1,0 +1,13 @@
+bp_print_welcome_message ${BASH_SOURCE[0]}
+
+_impl_jira_create_subtasks()
+{
+    local subtaskName=$1
+    local description=$2
+    local sprintVersion=$3
+
+cat << EOF
+- $subtaskName / labels:"Emaster" assignee:"@current" description:"$description" "Leading Team":"team_name" "Leading-Team":"team_name" component:"Emaster" "Gen20x Projects":"CIVIC_i2" affectedVersion:"$sprintVersion" fixversion:"$sprintVersion"
+EOF
+
+}

@@ -1,0 +1,5 @@
+alias la="ls -la"
+alias v="cat /mnt/vcdata/system-version.txt"
+alias h="help"
+alias scrp=". ~/.profile"
+alias srcp=". ~/.profile"

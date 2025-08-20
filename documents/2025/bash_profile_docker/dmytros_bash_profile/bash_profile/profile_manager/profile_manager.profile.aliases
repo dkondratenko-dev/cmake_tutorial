@@ -1,0 +1,4 @@
+bp_print_welcome_message ${BASH_SOURCE[0]}
+
+alias h="pm_show_help_menu"
+alias help="pm_show_help_menu"

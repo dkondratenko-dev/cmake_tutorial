@@ -1,0 +1,35 @@
+#include "$ClassName.h"
+
+#include "LoggingApi.h"
+#include <assert.h>
+
+namespace Emaster {
+
+$ClassName::$ClassName()
+{
+    FUNCTION_ENTERED;
+    LOG_INF("$ClassName created");
+}
+
+$ClassName::~$ClassName()
+{
+    FUNCTION_ENTERED;
+    LOG_INF("~$ClassName deleted");
+}
+
+auto $ClassName::getSomething()
+{
+    FUNCTION_ENTERED;
+
+    return m_member;
+}
+
+void $ClassName::setSomething(int v)
+{
+    FUNCTION_ENTERED;
+
+    LOG_INF("Passed value: {1}", v);
+    m_member = v;
+}
+
+} // namespace Emaster
