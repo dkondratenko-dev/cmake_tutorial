@@ -1,0 +1,12 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+        {
+            "label": "BUILD WITH docker - example 21",
+            "type": "shell",
+            "command": "docker run --rm -v $(pwd):/app cpp-gtest-debug /bin/bash -c "mkdir build && cd build && cmake .. && make",
+            "group": "none",
+            "problemMatcher": []
+        },        
+	]
+}

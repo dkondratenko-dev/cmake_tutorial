@@ -149,7 +149,7 @@ You're absolutely right - I gave you the setup but didn't walk through the actua
 
 Before we dive into the steps, let me help you understand why Docker debugging requires a special approach. When your C++ program runs inside a Docker container, it's like your program is living inside a sealed box. Your VSCode is outside the box, trying to look inside and control what's happening. We need to create windows and doors in this box so VSCode can reach in and debug your program. There are actually three different ways to accomplish this, and I'll show you all three so you can choose the best one for your situation.
 
-### Method 1: Using Dev Containers (The Automatic Way)
+### Method 1: Using Dev Containers (The Automatic Way) (Tested but didn't worked)
 
 This is the most elegant approach because VSCode handles most of the complexity for you. Think of it as VSCode moving itself inside the Docker container to sit right next to your program. Let me walk you through this step by step.
 
@@ -324,7 +324,7 @@ Then create `.vscode/launch.json`:
 
 Now you can debug! Set a breakpoint on line 35 (where we call `calc.add(10, 20)`) by clicking to the left of the line number. Press F5 to start debugging. The program will compile inside the container, then stop at your breakpoint. You can step through the code with F10, step into functions with F11, and inspect variables in the Variables panel. Everything is running inside Docker, but it feels just like local debugging!
 
-### Method 2: Manual Docker with GDB Server
+### Method 2: Manual Docker with GDB Server (Working)
 
 Sometimes you can't use Dev Containers - maybe you're working with an existing Docker setup or need more control. Let me show you how to debug manually using gdbserver. This method helps you understand what's really happening under the hood.
 
@@ -475,7 +475,7 @@ the staps 5-7 can be replaced with this:
 devuser@e5c0f518db67:/app/build$ gdbserver :9999 app/long_running 
 ```
 
-### Method 3: Docker with SSH (Most Flexible)
+### Method 3: Docker with SSH (Most Flexible) (Not yet tested)
 
 This third method treats your Docker container like a remote machine you can SSH into. It's more complex to set up but gives you the most flexibility. Create `Dockerfile.ssh`:
 
