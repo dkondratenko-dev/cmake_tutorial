@@ -60,15 +60,25 @@ Some topics are available in: **documents/2025**
 		- [x] pre-build task to run before build - check dependency, setup environment
 		- [x] post build task to run after build - run tests, package artifacts, deply to unix server?(xcopy, run script, etc)
 - [x] AOP in c++ -- Aspect Oriented Programming (AOP) is not popular in c++. Only Java and C#
-- [ ] Bash profile
+- [x] Bash profile
 
-Docker(August - start to middle) 
+Docker(August - start to middle)
+
+Kubuntu - KDE Ubuntu
+Xubuntu - XFCE Ubuntu
+Edubuntu - Educational Ubuntu
+
+bsd linux
+freeBSD
+bsd -> freeBSD
+bsd -> MacOS
+
 
 - [ ] Docker with VSCode/c++ 
-- [ ] Create simple docker container - windows
-- [ ] Create simple docker container - Linux
-- [ ] Debug docker container
-- [ ] Debug remote docker container
+- [x] Create simple docker container - windows
+- [X] Create simple docker container - Linux
+- [x] Debug docker container
+- [X] Debug remote docker container (connect via ssh to remote server and debug as local)
 
 Git/Github (August - middle to end)
 

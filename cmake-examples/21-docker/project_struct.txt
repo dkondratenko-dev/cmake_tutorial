@@ -1,17 +1,14 @@
 project/
 │   Dockerfile
 │   CMakeLists.txt
-│
 ├── src
 │   └── mylib
 │       ├── CMakeLists.txt
 │       ├── DataProcessor.cpp
 │       └── DataProcessor.h
-│
 ├── app
 │   ├── CMakeLists.txt
 │   └── main.cpp
-│
 └── tests
     ├── CMakeLists.txt
     └── DataProcessorTests.cpp
