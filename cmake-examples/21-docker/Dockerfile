@@ -3,6 +3,7 @@ FROM ubuntu:22.04
 RUN apt-get update && apt-get install -y \
     g++ gdb gdbserver cmake git make
 
+#what are UID and GID?
 ARG UID=1000
 ARG GID=1000
 
