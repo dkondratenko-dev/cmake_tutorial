@@ -1,3 +1,4 @@
+# Setup for Docker variables
 # Enable verbose for debugging
 #set -v
 

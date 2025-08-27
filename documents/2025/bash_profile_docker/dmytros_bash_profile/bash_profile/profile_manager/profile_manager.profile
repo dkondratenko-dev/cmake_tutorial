@@ -1,3 +1,7 @@
+#Engine for all of the profile functionality - Called from runner.profile
+#Switching between platforms, loading and managing help functionaltiy etc
+#Manages the recursive loading function 
+
 # Enable verbose for debugging
 # set -x
 # set -o functrace
@@ -39,7 +43,7 @@ pm_source_profile()
     # Get profile name. eg. platform/docker/build will use build as a name
     profileBaseName=$(basename $profileName)
 
-    # Source profile
+    # Source profile platform/desktop/archieve
     local profileFilePath=$BP_BASH_PROFILE_DIR/profiles/$profileName/$profileBaseName.profile
     if [ ! -f $profileFilePath ]; then
         #echo "$pm_file_name:$LINENO " "Profile does not exists: $profileFilePath"
@@ -320,7 +324,7 @@ pm_import_profile_recursive()
     cd $pervDir
 
     for profileKey in ${dirs[@]}; do
-        pm_import_profile $profileKey
+        pm_import_profile $profileKey 
     done
 }
 

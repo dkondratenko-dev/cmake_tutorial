@@ -1,3 +1,4 @@
+#Retrieves version from the version file - a version.txt file is needed with this
 vrsn_get()
 {
     local fileName=${BASH_SOURCE[0]}

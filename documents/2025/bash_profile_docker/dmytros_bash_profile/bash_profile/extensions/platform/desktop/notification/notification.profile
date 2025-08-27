@@ -1,3 +1,6 @@
+#Custom audio commands for use in notification during build
+#Used originally for very long builds, like 30mins - audio builds free a developer to work on something else while waiting for audio notifications
+
 hlp_file_name=$(basename ${BASH_SOURCE[0]})
 
 ntfy_play_bell()
@@ -17,9 +20,10 @@ ntfy_play_sound()
   done
 }
 
+#Audio .ogg and .oga files are all available in Ubuntu
 ntfy_play_info()
 {
-  ntfy_play_sound /usr/share/sounds/ubuntu/stereo/dialog-information.ogg
+  ntfy_play_sound /usr/share/sounds/ubuntu/stereo/dialog-information.ogg  
 }
 
 ntfy_play_complete()

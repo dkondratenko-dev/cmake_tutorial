@@ -1,5 +1,17 @@
 #!/bin/bash
 
+#Use this to setup the profile - the bashrc will read this automatically
+#This will setup the desktop profile and not the docker.runner.profile
+#This file goes to the root of my home folder into a folder called 
+#One time installation procedure: 
+#1 - cd to the bash_profile folder
+#2 - /bash_profile$./setup_bash_profile.sh
+#3 - It will for path to some tools but this can be skipped by hitting enter
+
+#One time installation procedure(Docker): 
+#1 - Attach the bash_profile folder as a volume to docker
+#2 - Inside container add to the containers .bashrc file path_to/runner.profile docker
+# echo >> $HOME/.bashrc "source path_to/runner.profile docker"
 BP_BASH_PROFILE_DIR=""
 BP_PROJECT_DIR=""
 BP_PROFILE_MANAGER_DIR=""

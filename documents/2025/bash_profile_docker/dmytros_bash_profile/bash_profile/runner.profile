@@ -1,3 +1,4 @@
+#Processed from bashrc when user opens new terminal 
 # Enable verbose for debugging
 #set -v
 

@@ -2,6 +2,7 @@ bp_print_welcome_message ${BASH_SOURCE[0]}
 
 # Check is function exists before run
 # If functions is not exists, it will not be executed
+# Use for cross-platform checks before using a function
 cmd_crossplatform_run()
 {
     local cmd=$1

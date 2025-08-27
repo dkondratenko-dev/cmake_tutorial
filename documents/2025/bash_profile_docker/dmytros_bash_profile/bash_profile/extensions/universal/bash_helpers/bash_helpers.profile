@@ -1,5 +1,7 @@
+#Cross-Platform customization
 hlp_file_name=$(basename ${BASH_SOURCE[0]})
 
+#If last command was a failure the MSG will be shown in the console
 hlp_exit_on_error()
 {
     local HLP_COMMAND_CALL_RESULT=$?
@@ -25,6 +27,7 @@ hlp_get_result()
     HLP_COMMAND_CALL_RESULT=$?
 }
 
+#If the last bash command passed it will convert to string "PASSED" or "FAILED"
 hlp_get_command_call_string_result()
 {
     HLP_COMMAND_CALL_RESULT=$?
@@ -38,6 +41,7 @@ hlp_get_command_call_string_result()
 }
 
 # function to set terminal title
+# Use with multitab terminal window to set the tab titles
 hlp_set_tab_title()
 {
   title=$1
@@ -45,6 +49,8 @@ hlp_set_tab_title()
   #PROMPT_COMMAND='echo -en "\033]0; $title \a"'
 }
 
+#List help for the profile commands
+#Type h in terminal and it will print supported commands by profile and by platform
 hlp_list_profile_commands()
 {
     local filePath=$1
@@ -56,10 +62,12 @@ hlp_list_profile_commands()
     grep -E '^[[:space:]]*([[:alnum:]_]+[[:space:]]*\(\)|alias[[:space:]]+[[:alnum:]_]+)' $filePath | sed -e 's/^/    /'
 }
 
+#Helper function to help if a function exists in the profile
 hlp_check_function_exists()
 {
     # Assign to a variable to hide command output
-    local t=$(type -t $1)
+    # Runs in detached profile
+    local t=$(type -t $1) 
 
     hlp_get_result
 

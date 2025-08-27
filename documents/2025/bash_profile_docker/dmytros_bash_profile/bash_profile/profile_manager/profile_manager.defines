@@ -1,3 +1,4 @@
+#Global variables for profile
 BP_PROFILE_TYPE_DESKTOP="desktop"
 BP_PROFILE_TYPE_DOCKER="docker"
 BP_PROFILE_TYPE_MTTF="mttf"

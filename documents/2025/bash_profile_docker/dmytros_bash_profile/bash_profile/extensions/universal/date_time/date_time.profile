@@ -1,6 +1,7 @@
 hlp_file_name=$(basename ${BASH_SOURCE[0]})
 
 # display human readable time from seconds
+# Converts unix timestamp to days/hours/mins/secs
 # usage:
 # $ printf "Elapsed time: "
 # $ dt_hu_time $elapsed
