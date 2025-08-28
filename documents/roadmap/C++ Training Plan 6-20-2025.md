@@ -1,26 +1,23 @@
-Goal - I am actually learning C++ by myself but I lack knowledge of "dev environment". So most help will focus on environment.
-(Targeting end of September 2025 to finish training - some time estimates are shown below)
+Goal - C++ training
 
 Training pattern
-
-Before training
-	- Training documents
-During training
-	- Overview 10%
-	- Why is it useful? How to use? Where to use? When to use? 20%
-	- Hello World code example 40%
-	- Coding practice 30%
-
-VSCode(June/July)
+    Before training
+        - Training documents
+    During training
+        - Overview 10%
+        - Why is it useful? How to use? Where to use? When to use? 20%
+        - Hello World code example 40%
+        - Coding practice 30%
 
 Some topics are available in: **documents/2025**
 
-- [ ] CMake (2 weeks)
+- [ ] VSCode
+- [ ] CMake 
 	- [x] CMake/Google Testing
 		- [x] Test instrumenting with chrono and rdtsc 
 	- [ ] CMakePresets - introduction
-- [ ] Debugging (3 weeks)	
-	- [ ] Profiling (1 week)
+- [ ] Debugging	
+	- [ ] Profiling
 		- [x] Valgrind
 		- [ ] gprof
 		- [ ] perf
@@ -53,51 +50,43 @@ Some topics are available in: **documents/2025**
 	- [x] Scheduling, CPU affinity
 	- [x] NUMA (Non-Uniform Memory Access)
 	- [x] Kernel bypass
-- [ ] VSCode in Linux (2 weeks)
+- [ ] VSCode in Linux
 	- [x] Debugging code running on a remote Linux server	
 	- [x] Debug a remote Docker container
 	- [x] Add simple steps with tasks.json file 
 		- [x] pre-build task to run before build - check dependency, setup environment
 		- [x] post build task to run after build - run tests, package artifacts, deply to unix server?(xcopy, run script, etc)
+		- [ ] About Ubuntu
+            - [ ] Kubuntu - KDE Ubuntu
+            - [ ] Xubuntu - XFCE Ubuntu
+            - [ ] Edubuntu - Educational Ubuntu
+            - [ ] bsd linux
+            - [ ] freeBSD
+            - [ ] bsd -> freeBSD
+            - [ ] bsd -> MacOS
 - [x] AOP in c++ -- Aspect Oriented Programming (AOP) is not popular in c++. Only Java and C#
 - [x] Bash profile
 
-Docker(August - start to middle)
-
-Kubuntu - KDE Ubuntu
-Xubuntu - XFCE Ubuntu
-Edubuntu - Educational Ubuntu
-
-bsd linux
-freeBSD
-bsd -> freeBSD
-bsd -> MacOS
-
-
+Docker
 - [ ] Docker with VSCode/c++ 
 - [x] Create simple docker container - windows
 - [X] Create simple docker container - Linux
 - [x] Debug docker container
 - [X] Debug remote docker container (connect via ssh to remote server and debug as local)
 
-Git/Github (August - middle to end)
-
+Git/Github
 - [ ] Using git from command line - fetch, pull, push, merge, rebase, cherry-pick, reset
 - [ ] [https://learngitbranching.js.org/](https://learngitbranching.js.org/)
 
-C++ packages (1 week)
-
+C++ packages
 - [ ] Creating C++ package 
 	- [ ] with vcpkg  
 	- [ ] with Conan2
 
-Minor issues (1 day)
-
-- [ ] How to fix VSCode SonarCube issue?
+Minor issues
 - [ ] Why is ECS pattern good for games but not good for financial market analysis? - with C++ examples
 
-Leetcode (The rest of September)
- - [ ] I will learn this on my own, but I need you to play the role of an interviewer and ask random questions to test my skills
+Leetcode 
 -----
 CMake tools links
   - [ ] CMake Tools quick start - [https://code.visualstudio.com/docs/cpp/CMake-linux](https://code.visualstudio.com/docs/cpp/CMake-linux)
